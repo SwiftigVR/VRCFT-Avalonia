@@ -1,0 +1,410 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Design.PreviewWith>
+		<Border Padding="5" Width="300" Background="#111">
+			<StackPanel Spacing="5">
+
+				<Button Theme="{StaticResource FormButton}"
+						Content="Button" />
+
+				<Button Theme="{StaticResource FormButton}"
+						Content="Button" IsEnabled="False"/>
+
+				<Rectangle Fill="#777"
+						   Height="1"/>
+
+				<Label Theme="{StaticResource FormLabel}"
+					   Content="Form Label Example" />
+
+				<Label Theme="{StaticResource FormLabel}"
+					   Content="Form Label Example" IsEnabled="False" />
+
+				<Rectangle Fill="#777"
+						   Height="1"/>
+
+				<CheckBox Theme="{StaticResource FormCheckBox}"
+						  Content="Form CheckBox Example" />
+
+				<CheckBox Theme="{StaticResource FormCheckBox}"
+						  Content="Form CheckBox Example" IsEnabled="False"/>
+
+				<Rectangle Fill="#777"
+						   Height="1"/>
+
+				<ComboBox>
+					<ComboBoxItem Content="Option 1"/>
+					<ComboBoxItem Content="Option 2"/>
+					<ComboBoxItem Content="Option 3"/>
+				</ComboBox>
+
+				<ComboBox IsEnabled="False">
+					<ComboBoxItem Content="Option 1"/>
+					<ComboBoxItem Content="Option 2"/>
+					<ComboBoxItem Content="Option 3"/>
+				</ComboBox>
+
+				<Rectangle Fill="#777"
+						   Height="1"/>
+
+				<StackPanel Orientation="Horizontal"
+							Spacing="10">
+
+					<Slider Theme="{StaticResource FormSlider}"
+							Orientation="Vertical"
+							Minimum="0"
+							Maximum="1"
+							Height="100" />
+
+					<Slider Theme="{StaticResource FormSlider}"
+							Orientation="Vertical"
+							Minimum="0"
+							Maximum="1"
+							Height="100"
+							IsEnabled="False"/>
+
+					<Slider Theme="{StaticResource FormSlider}"
+							Orientation="Horizontal"
+							Minimum="0"
+							Maximum="1"
+							Width="100" />
+
+					<Slider Theme="{StaticResource FormSlider}"
+							Orientation="Horizontal"
+							Minimum="0"
+							Maximum="1"
+							Width="100"
+							IsEnabled="False"/>
+
+				</StackPanel>
+
+				<Rectangle Fill="#777"
+						   Height="1"/>
+
+			</StackPanel>
+		</Border>
+	</Design.PreviewWith>
+
+	<!-- Button -->
+	<ControlTheme TargetType="Button" x:Key="FormButton">
+		<Setter Property="Foreground" Value="White" />
+		<Setter Property="Background" Value="#222" />
+		<Setter Property="BorderBrush" Value="#333"/>
+
+		<Setter Property="FontSize" Value="18"/>
+		<Setter Property="FontFamily" Value="Segoe UI"/>
+
+		<Setter Property="VerticalAlignment" Value="Top" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Border x:Name="border"
+						Background="{TemplateBinding Background}"
+						BorderBrush="{TemplateBinding BorderBrush}"
+						BorderThickness="{TemplateBinding BorderThickness}"
+						Padding="12,0"
+						CornerRadius="3"
+						Height="30">
+
+					<ContentPresenter x:Name="PART_ContentPresenter"
+									  Content="{TemplateBinding Content}"
+									  VerticalAlignment="Center"
+									  HorizontalAlignment="Center"/>
+
+				</Border>
+			</ControlTemplate>
+		</Setter>
+
+		<Style Selector="^:disabled">
+			<Setter Property="Opacity" Value="0.6"/>
+		</Style>
+
+		<Style Selector="^:pointerover">
+			<Setter Property="Background" Value="#444"/>
+			<Setter Property="BorderBrush" Value="#555"/>
+		</Style>
+
+		<Style Selector="^:pressed">
+			<Setter Property="Background" Value="#333"/>
+			<Setter Property="BorderBrush" Value="#444"/>
+		</Style>
+	</ControlTheme>
+
+	<!-- Label -->
+	<ControlTheme TargetType="Label" x:Key="FormLabel">
+		<Setter Property="Foreground" Value="{DynamicResource UiText}" />
+
+		<Setter Property="FontSize" Value="18"/>
+		<Setter Property="FontFamily" Value="Segoe UI"/>
+
+		<Setter Property="VerticalAlignment" Value="Top" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+
+		<Style Selector="^:disabled">
+			<Setter Property="Opacity" Value="0.6"/>
+		</Style>
+	</ControlTheme>
+
+	<!-- CheckBox -->
+	<ControlTheme TargetType="CheckBox" x:Key="FormCheckBox">
+		<Setter Property="Foreground" Value="{DynamicResource UiText}" />
+		<Setter Property="Background" Value="#222" />
+
+		<Setter Property="FontSize" Value="16"/>
+		<Setter Property="FontFamily" Value="Segoe UI"/>
+
+		<Setter Property="VerticalAlignment" Value="Top" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Grid ColumnDefinitions="Auto,*"
+					  ColumnSpacing="0"
+					  Background="Transparent">
+
+					<Border x:Name="Border"
+							Grid.Column="0"
+							Width="24"
+							Height="24"
+							CornerRadius="3"
+							Background="{TemplateBinding Background}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							BorderBrush="{TemplateBinding BorderBrush}">
+
+						<TextBlock Name="checkboxIcon"
+								   VerticalAlignment="Center"
+								   HorizontalAlignment="Center"
+								   FontWeight="Bold"
+								   FontFamily="Segoe MDL2 Assets"
+								   Foreground="White"
+								   IsHitTestVisible="False"
+								   IsVisible="{TemplateBinding IsChecked}">
+							&#xE73E;
+						</TextBlock>
+
+					</Border>
+
+					<ContentPresenter x:Name="PART_ContentPresenter"
+									  ContentTemplate="{TemplateBinding ContentTemplate}"
+									  Content="{TemplateBinding Content}"
+									  TextWrapping="NoWrap"
+									  Grid.Column="1"
+									  Margin="6,0,0,0"
+									  VerticalAlignment="Center"
+									  HorizontalAlignment="Left"
+									  RecognizesAccessKey="True"/>
+
+				</Grid>
+			</ControlTemplate>
+		</Setter>
+
+		<Style Selector="^:disabled">
+			<Setter Property="Opacity" Value="0.6"/>
+		</Style>
+
+		<Style Selector="^:checked">
+			<Setter Property="BorderBrush" Value="Green"/>
+			<Setter Property="Background" Value="DarkGreen"/>
+		</Style>
+
+		<Style Selector="^:pointerover:checked">
+			<Setter Property="Background" Value="LightGreen"/>
+		</Style>
+
+		<Style Selector="^:pointerover:not(:checked)">
+			<Setter Property="Background" Value="#444"/>
+			<Setter Property="BorderBrush" Value="#555"/>
+		</Style>
+	</ControlTheme>
+
+	<!-- ComboBox -->
+
+
+	<!-- Slider -->
+	<ControlTheme TargetType="RepeatButton" x:Key="FormSliderButton">
+		<Setter Property="IsTabStop" Value="false"/>
+		<Setter Property="Focusable" Value="false"/>
+
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Border Background="Transparent" />
+			</ControlTemplate>
+		</Setter>
+
+		<Style Selector="^:disabled">
+			<Setter Property="Opacity" Value="0.6"/>
+		</Style>
+	</ControlTheme>
+
+	<ControlTheme TargetType="Thumb" x:Key="FormSliderThumb" >
+		<Setter Property="Background" Value="Green"/>
+
+		<Setter Property="Height" Value="20"/>
+		<Setter Property="Width" Value="12"/>
+
+		<Setter Property="Template">
+			<ControlTemplate>
+				<Border x:Name="border"
+						Background="{TemplateBinding Background}"
+						BorderThickness="2"
+						CornerRadius="3"
+						BorderBrush="White"/>
+			</ControlTemplate>
+		</Setter>
+
+		<Style Selector="^:disabled">
+			<Setter Property="Opacity" Value="0.6"/>
+		</Style>
+
+		<Style Selector="^:pointerover">
+			<Setter Property="Background" Value="Red"/>
+		</Style>
+	</ControlTheme>
+
+	<ControlTheme TargetType="Slider" x:Key="FormSlider">
+		<Setter Property="Foreground" Value="#333"/>
+
+		<Style Selector="^:horizontal">
+			<Setter Property="MinWidth" Value="80"/>
+			<Setter Property="MinHeight" Value="21"/>
+
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Grid Background="Transparent">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="auto"/>
+							<RowDefinition Height="auto" MinHeight="{TemplateBinding MinHeight}"/>
+							<RowDefinition Height="auto"/>
+						</Grid.RowDefinitions>
+
+						<TickBar x:Name="TopTick"
+								 Placement="Top"
+								 Height="4"
+								 IsVisible="True"
+								 Fill="#333"/>
+
+						<Border x:Name="TrackBackground"
+								Margin="0"
+								CornerRadius="2"
+								Height="4"
+								Grid.Row="1"
+								BorderThickness="2"
+								BorderBrush="#333"
+								Background="#333"/>
+
+						<Track Grid.Row="1" x:Name="PART_Track"
+							   Minimum="{TemplateBinding Minimum}"
+							   Maximum="{TemplateBinding Maximum}"
+							   Value="{TemplateBinding Value, Mode=TwoWay}"
+							   IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
+							   Orientation="Horizontal">
+
+							<Track.DecreaseButton>
+								<RepeatButton Theme="{StaticResource FormSliderButton}"
+											  Name="PART_DecreaseButton"
+											  Focusable="False"/>
+							</Track.DecreaseButton>
+
+							<Track.Thumb>
+								<Thumb Theme="{StaticResource FormSliderThumb}"
+									   Name="SliderThumb"
+									   DataContext="{TemplateBinding Value}"/>
+							</Track.Thumb>
+
+							<Track.IncreaseButton>
+								<RepeatButton Theme="{StaticResource FormSliderButton}"
+											  Name="PART_IncreaseButton"
+											  Focusable="False"/>
+							</Track.IncreaseButton>
+						</Track>
+
+						<TickBar x:Name="BottomTick"
+								 Grid.Row="2"
+								 Fill="#333"
+								 Placement="Bottom"
+								 Height="4"
+								 IsVisible="True"/>
+					</Grid>
+				</ControlTemplate>
+			</Setter>
+		</Style>
+
+		<Style Selector="^:vertical">
+			<Setter Property="MinWidth" Value="21"/>
+			<Setter Property="MinHeight" Value="80"/>
+
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Grid Background="Transparent">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="auto"/>
+							<ColumnDefinition Width="auto" MinWidth="{TemplateBinding MinWidth}"/>
+							<ColumnDefinition Width="auto"/>
+						</Grid.ColumnDefinitions>
+
+						<TickBar x:Name="TopTick"
+								 Placement="Left"
+								 Width="4"
+								 IsVisible="True"
+								 Fill="#333"/>
+
+						<Border x:Name="TrackBackground"
+								Margin="0"
+								CornerRadius="2"
+								Width="4"
+								Grid.Row="1"
+								BorderThickness="2"
+								BorderBrush="#333"
+								Background="#333"/>
+
+						<Track Grid.Row="1" x:Name="PART_Track"
+							   Minimum="{TemplateBinding Minimum}"
+							   Maximum="{TemplateBinding Maximum}"
+							   Value="{TemplateBinding Value, Mode=TwoWay}"
+							   IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
+							   Orientation="Vertical">
+
+							<Track.DecreaseButton>
+								<RepeatButton Theme="{StaticResource FormSliderButton}"
+											  Name="PART_DecreaseButton"
+											  Focusable="False"/>
+							</Track.DecreaseButton>
+
+							<Track.Thumb>
+								<Thumb Theme="{StaticResource FormSliderThumb}"
+									   Name="SliderThumb"
+									   DataContext="{TemplateBinding Value}"/>
+							</Track.Thumb>
+
+							<Track.IncreaseButton>
+								<RepeatButton Theme="{StaticResource FormSliderButton}"
+											  Name="PART_IncreaseButton"
+											  Focusable="False"/>
+							</Track.IncreaseButton>
+
+						</Track>
+
+						<TickBar x:Name="BottomTick"
+								 Grid.Row="2"
+								 Fill="#333"
+								 Placement="Right"
+								 Height="4"
+								 IsVisible="True"/>
+					</Grid>
+				</ControlTemplate>
+			</Setter>
+		</Style>
+
+		<Style Selector="^:disabled">
+			<Setter Property="Opacity" Value="0.6"/>
+		</Style>
+
+		<Style Selector="^:pointerover /template/ Thumb, ^:focused /template/ Thumb">
+			<Setter Property="Background" Value="#555"/>
+		</Style>
+	</ControlTheme>
+
+</ResourceDictionary>

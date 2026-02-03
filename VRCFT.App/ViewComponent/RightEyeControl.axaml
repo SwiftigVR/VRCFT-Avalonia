@@ -48,13 +48,13 @@
 					<Binding Path="Width" RelativeSource="{RelativeSource Self}"/>
 				</Border.Height>
 
-				<!-- Impers: Double CLick => Reset to 0/0 -->
 				<Canvas x:Name="RightEyeCanvas">
                     <Thumb x:Name="RightEyeThumb"
                            Width="16"
                            Height="16"
                            Margin="-8,-8,0,0"
-                           DragDelta="RightEyeDrag">
+                           DragDelta="RightEyeDrag"
+						   DoubleTapped="RightEyeReset">
 
                         <Canvas.Left>
                             <MultiBinding Mode="TwoWay" Converter="{StaticResource EyeXToCanvasConverter}">

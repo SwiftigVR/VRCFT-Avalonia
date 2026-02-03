@@ -34,4 +34,16 @@ public partial class LeftEyeControl : UserControl
         vm.EyeLeftX = Math.Clamp(normalizedX, -100d, 100d);
         vm.EyeY = Math.Clamp(normalizedY, -100d, 100d);
     }
+
+    private void LeftEyeReset(object? sender, TappedEventArgs e)
+    {
+        if (DataContext is not AppViewModel vm)
+            return;
+
+        vm.EyeLeftX = 0;
+        vm.EyeY = 0;
+
+        if (vm.SyncEyeLook)
+            vm.EyeRightX = 0;
+    }
 }

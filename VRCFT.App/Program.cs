@@ -13,11 +13,7 @@ internal sealed class Program
     {
         try
         {
-#if DEBUG
-            BuildAvaloniaApp().WithDeveloperTools().StartWithClassicDesktopLifetime(args);
-#else
             BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-#endif
             return 0;
         }
         catch //(Exception ex)
@@ -33,6 +29,9 @@ internal sealed class Program
         var builder = AppBuilder.Configure<App>()
                                 .UsePlatformDetect()
                                 .WithInterFont()
+#if DEBUG
+                                .WithDeveloperTools()
+#endif
                                 .LogToTrace();
 
         return builder;

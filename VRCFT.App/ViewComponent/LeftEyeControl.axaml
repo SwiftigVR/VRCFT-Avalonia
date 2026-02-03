@@ -61,8 +61,7 @@
 						Maximum="1"
 						IsSnapToTickEnabled="{Binding SliderTicksEnabled}"
 						TickPlacement="Outside"
-						TickFrequency="0.1"
-						Value="{Binding BrowExpressionLeft}" />
+						TickFrequency="0.1" />
 
 				<Slider Orientation="Vertical"
 						Margin="0,5"

@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using System;
+using VRCFT.App.Utility;
 using VRCFT.App.ViewModel;
 
 namespace VRCFT.App.ViewComponent;
@@ -31,8 +32,11 @@ public partial class RightEyeControl : UserControl
         var normalizedX = (newLeft / canvasWidth) * 200d - 100d;           // -100 (left) .. 100 (right)
         var normalizedY = (1d - (newTop / canvasHeight)) * 200d - 100d;    // -100 (bottom) .. 100 (top)
 
-        vm.EyeRightX = Math.Clamp(normalizedX, -100d, 100d);
-        vm.EyeY = Math.Clamp(normalizedY, -100d, 100d);
+        var clampedX = Math.Clamp(normalizedX, -100d, 100d);
+        var clampedY = Math.Clamp(normalizedY, -100d, 100d);
+
+        vm.EyeRightX = clampedX.LimitDecimal(4);
+        vm.EyeY = clampedY.LimitDecimal(4);
     }
 
     private void RightEyeReset(object? sender, TappedEventArgs e)

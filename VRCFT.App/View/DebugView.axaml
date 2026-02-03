@@ -1,0 +1,72 @@
+<Window xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		mc:Ignorable="d"
+
+		xmlns:vm="using:VRCFT.App.ViewModel"
+
+		x:Class="VRCFT.App.DebugView"
+		x:DataType="vm:AppViewModel"
+
+		Width="600"
+		Height="400"
+
+		Icon="/Assets/VrcftTool.ico"
+		Title="DebugView"
+
+		CanMinimize="False"
+		CanMaximize="False"
+
+		Padding="5,0,5,5"
+		Background="Transparent"
+		TransparencyLevelHint="Mica"
+		TransparencyBackgroundFallback="#222">
+
+	<Border Grid.Row="0"
+			Padding="10"
+			BorderBrush="#444"
+			BorderThickness="1"
+			CornerRadius="5">
+		<Grid RowSpacing="5"
+			  ColumnSpacing="5">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<Label Grid.Row="0"
+				   Grid.Column="0"
+				   Content="Left Eye X:" />
+			<Label Grid.Row="0"
+				   Grid.Column="1"
+				   Content="{Binding EyeLeftX}"
+				   Classes="Code"
+				   Width="63" />
+
+			<Label Grid.Row="1"
+				   Grid.Column="0"
+				   Content="Right Eye X:" />
+			<Label Grid.Row="1"
+				   Grid.Column="1"
+				   Content="{Binding EyeRightX}"
+				   Classes="Code"
+				   Width="63" />
+
+			<Label Grid.Row="2"
+				   Grid.Column="0"
+				   Content="Both Eye Y:" />
+			<Label Grid.Row="2"
+				   Grid.Column="1"
+				   Content="{Binding EyeY}"
+				   Classes="Code"
+				   Width="63" />
+
+		</Grid>
+	</Border>
+</Window>

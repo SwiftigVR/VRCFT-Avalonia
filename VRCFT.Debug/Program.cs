@@ -46,9 +46,7 @@ internal class Program
                     }
                 }
 
-                Console.WriteLine($"Parameter: {message.Address}");
-                Console.WriteLine($"--> Value: {argumentMessage ?? "Invalid type!"}");
-                Console.WriteLine();
+                Console.WriteLine($"Parameter: {message.Address} - Value: {argumentMessage ?? "Invalid type!"}");
             }
         });
 

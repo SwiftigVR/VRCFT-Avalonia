@@ -14,13 +14,13 @@
 			 d:DesignHeight="350">
 
 	<UserControl.Resources>
-		<converter:MinDoubleConverter x:Key="MinDoubleConverter"/>
+		<converter:MinDoubleConverter x:Key="MinDoubleConverter" />
 		<converter:EyeXToCanvasConverter x:Key="EyeXToCanvasConverter" />
         <converter:EyeYToCanvasConverter x:Key="EyeYToCanvasConverter" />
 	</UserControl.Resources>
 
 	<Design.DataContext>
-		<vm:AppViewModel/>
+		<vm:AppViewModel />
 	</Design.DataContext>
 
 	<Grid>
@@ -40,12 +40,12 @@
 					HorizontalAlignment="Center">
 				<Border.Width>
 					<MultiBinding Converter="{StaticResource MinDoubleConverter}">
-						<Binding RelativeSource="{RelativeSource AncestorType=Grid}" Path="Bounds.Width"/>
-						<Binding RelativeSource="{RelativeSource AncestorType=Grid}" Path="Bounds.Height"/>
+						<Binding RelativeSource="{RelativeSource AncestorType=Grid}" Path="Bounds.Width" />
+						<Binding RelativeSource="{RelativeSource AncestorType=Grid}" Path="Bounds.Height" />
 					</MultiBinding>
 				</Border.Width>
 				<Border.Height>
-					<Binding Path="Width" RelativeSource="{RelativeSource Self}"/>
+					<Binding Path="Width" RelativeSource="{RelativeSource Self}" />
 				</Border.Height>
 
 				<Canvas x:Name="RightEyeCanvas">
@@ -104,7 +104,7 @@
 						IsSnapToTickEnabled="{Binding SliderTicksEnabled}"
 						TickPlacement="Outside"
 						Ticks="0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.75,0.8,0.9,1"
-						Value="0.75"/>
+						Value="{Binding EyeLidRight}" />
 
 			</Grid>
 		</Border>
@@ -132,7 +132,16 @@
 						Maximum="1"
 						IsSnapToTickEnabled="{Binding SliderTicksEnabled}"
 						TickPlacement="Outside"
-						TickFrequency="0.1"/>
+						TickFrequency="0.1" />
+
+				<Slider Orientation="Vertical"
+						Margin="0,5"
+						Minimum="-1"
+						Maximum="1"
+						IsSnapToTickEnabled="{Binding SliderTicksEnabled}"
+						TickPlacement="Outside"
+						TickFrequency="0.1" 
+						Value="{Binding BrowExpressionRight}"/>
 
 				<Slider Orientation="Vertical"
 						Margin="0,5"
@@ -140,15 +149,7 @@
 						Maximum="1"
 						IsSnapToTickEnabled="{Binding SliderTicksEnabled}"
 						TickPlacement="Outside"
-						TickFrequency="0.1"/>
-
-				<Slider Orientation="Vertical"
-						Margin="0,5"
-						Minimum="0"
-						Maximum="1"
-						IsSnapToTickEnabled="{Binding SliderTicksEnabled}"
-						TickPlacement="Outside"
-						TickFrequency="0.1"/>
+						TickFrequency="0.1" />
 
 			</StackPanel>
 

@@ -14,13 +14,13 @@
 			 d:DesignHeight="350">
 
 	<UserControl.Resources>
-		<converter:MinDoubleConverter x:Key="MinDoubleConverter"/>
+		<converter:MinDoubleConverter x:Key="MinDoubleConverter" />
 		<converter:EyeXToCanvasConverter x:Key="EyeXToCanvasConverter" />
-        <converter:EyeYToCanvasConverter x:Key="EyeYToCanvasConverter" />
+		<converter:EyeYToCanvasConverter x:Key="EyeYToCanvasConverter" />
 	</UserControl.Resources>
 
 	<Design.DataContext>
-		<vm:AppViewModel/>
+		<vm:AppViewModel />
 	</Design.DataContext>
 
 	<Grid>
@@ -53,7 +53,16 @@
 						Maximum="1"
 						IsSnapToTickEnabled="{Binding SliderTicksEnabled}"
 						TickPlacement="Outside"
-						TickFrequency="0.1"/>
+						TickFrequency="0.1" />
+
+				<Slider Orientation="Vertical"
+						Margin="0,5"
+						Minimum="-1"
+						Maximum="1"
+						IsSnapToTickEnabled="{Binding SliderTicksEnabled}"
+						TickPlacement="Outside"
+						TickFrequency="0.1"
+						Value="{Binding BrowExpressionLeft}" />
 
 				<Slider Orientation="Vertical"
 						Margin="0,5"
@@ -61,15 +70,7 @@
 						Maximum="1"
 						IsSnapToTickEnabled="{Binding SliderTicksEnabled}"
 						TickPlacement="Outside"
-						TickFrequency="0.1"/>
-
-				<Slider Orientation="Vertical"
-						Margin="0,5"
-						Minimum="0"
-						Maximum="1"
-						IsSnapToTickEnabled="{Binding SliderTicksEnabled}"
-						TickPlacement="Outside"
-						TickFrequency="0.1"/>
+						TickFrequency="0.1" />
 
 			</StackPanel>
 
@@ -99,7 +100,7 @@
 						IsSnapToTickEnabled="{Binding SliderTicksEnabled}"
 						TickPlacement="Outside"
 						Ticks="0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.75,0.8,0.9,1"
-						Value="0.75"/>
+						Value="{Binding EyeLidLeft}" />
 
 			</Grid>
 		</Border>
@@ -114,43 +115,43 @@
 					HorizontalAlignment="Center">
 				<Border.Width>
 					<MultiBinding Converter="{StaticResource MinDoubleConverter}">
-						<Binding RelativeSource="{RelativeSource AncestorType=Grid}" Path="Bounds.Width"/>
-						<Binding RelativeSource="{RelativeSource AncestorType=Grid}" Path="Bounds.Height"/>
+						<Binding RelativeSource="{RelativeSource AncestorType=Grid}" Path="Bounds.Width" />
+						<Binding RelativeSource="{RelativeSource AncestorType=Grid}" Path="Bounds.Height" />
 					</MultiBinding>
 				</Border.Width>
 				<Border.Height>
-					<Binding Path="Width" RelativeSource="{RelativeSource Self}"/>
+					<Binding Path="Width" RelativeSource="{RelativeSource Self}" />
 				</Border.Height>
 
 				<Canvas x:Name="LeftEyeCanvas">
-                    <Thumb x:Name="LeftEyeThumb"
-                           Width="16"
-                           Height="16"
-                           Margin="-8,-8,0,0"
-                           DragDelta="LeftEyeDrag"
+					<Thumb x:Name="LeftEyeThumb"
+						   Width="16"
+						   Height="16"
+						   Margin="-8,-8,0,0"
+						   DragDelta="LeftEyeDrag"
 						   DoubleTapped="LeftEyeReset">
 
-                        <Canvas.Left>
-                            <MultiBinding Mode="TwoWay" Converter="{StaticResource EyeXToCanvasConverter}">
-                                <Binding Path="EyeLeftX" />
-                                <Binding RelativeSource="{RelativeSource AncestorType=Canvas}" Path="Bounds.Width" />
-                            </MultiBinding>
-                        </Canvas.Left>
+						<Canvas.Left>
+							<MultiBinding Mode="TwoWay" Converter="{StaticResource EyeXToCanvasConverter}">
+								<Binding Path="EyeLeftX" />
+								<Binding RelativeSource="{RelativeSource AncestorType=Canvas}" Path="Bounds.Width" />
+							</MultiBinding>
+						</Canvas.Left>
 
-                        <Canvas.Top>
-                            <MultiBinding Mode="TwoWay" Converter="{StaticResource EyeYToCanvasConverter}">
-                                <Binding Path="EyeY" />
-                                <Binding RelativeSource="{RelativeSource AncestorType=Canvas}" Path="Bounds.Height" />
-                            </MultiBinding>
-                        </Canvas.Top>
+						<Canvas.Top>
+							<MultiBinding Mode="TwoWay" Converter="{StaticResource EyeYToCanvasConverter}">
+								<Binding Path="EyeY" />
+								<Binding RelativeSource="{RelativeSource AncestorType=Canvas}" Path="Bounds.Height" />
+							</MultiBinding>
+						</Canvas.Top>
 
-                        <Thumb.Template>
-                            <ControlTemplate TargetType="Thumb">
-                                <Ellipse Fill="White" />
-                            </ControlTemplate>
-                        </Thumb.Template>
-                    </Thumb>
-                </Canvas>
+						<Thumb.Template>
+							<ControlTemplate TargetType="Thumb">
+								<Ellipse Fill="White" />
+							</ControlTemplate>
+						</Thumb.Template>
+					</Thumb>
+				</Canvas>
 			</Border>
 		</Grid>
 

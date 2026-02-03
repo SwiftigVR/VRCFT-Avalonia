@@ -1,13 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace VRCFT.App.Utility;
 
 public static class Extensions
 {
-    public static float ToClampedFloat(this double value)
+    public static float LimitDecimal(this float value, int afterDecimal = 2)
     {
-        return (float)(Math.Clamp(value, -100d, 100d) / 100d);
+        return (float)Math.Round((double)value, afterDecimal, MidpointRounding.AwayFromZero);
+    }
+
+    public static double LimitDecimal(this double value, int afterDecimal = 2)
+    {
+        return Math.Round(value, afterDecimal, MidpointRounding.AwayFromZero);
     }
 }

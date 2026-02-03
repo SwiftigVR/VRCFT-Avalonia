@@ -90,6 +90,19 @@ public partial class AppViewModel : ViewModelBase
 
     public bool SendingEnabled
     {
+        get => Osc.Enabled;
+        set
+        {
+            if (Osc.Enabled != value)
+            {
+                Osc.Enabled = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool SimplifiedExpressions
+    {
         get => field;
         set
         {
@@ -99,14 +112,6 @@ public partial class AppViewModel : ViewModelBase
                 OnPropertyChanged();
             }
         }
-    }
-
-    private void SendParameterMessage(object value, [CallerMemberName] string parameterName = null!)
-    {
-        if (!SendingEnabled || string.IsNullOrEmpty(parameterName))
-            return;
-
-        Osc.SendMessage(parameterName, value);
     }
 
     #region Eye Look
@@ -124,20 +129,24 @@ public partial class AppViewModel : ViewModelBase
         }
     }
 
+    private float ToClampedFloat(double value)
+    {
+        return (float)(Math.Clamp(value, -100d, 100d) / 100d);
+    }
+
     public double EyeLeftX
     {
         get => field;
         set
         {
-            var rounded = Math.Round(value, 2, MidpointRounding.AwayFromZero);
-            if (field != rounded)
+            if (field != value)
             {
-                field = rounded;
+                field = value;
 
                 if (SyncEyeLook)
-                    EyeRightX = rounded;
+                    EyeRightX = value;
 
-                SendParameterMessage(field.ToClampedFloat());
+                Osc.SendParameterMessage(ToClampedFloat(value));
                 OnPropertyChanged();
             }
         }
@@ -148,15 +157,14 @@ public partial class AppViewModel : ViewModelBase
         get => field;
         set
         {
-            var rounded = Math.Round(value, 2, MidpointRounding.AwayFromZero);
-            if (field != rounded)
+            if (field != value)
             {
-                field = rounded;
+                field = value;
 
                 if (SyncEyeLook)
-                    EyeLeftX = rounded;
+                    EyeLeftX = value;
 
-                SendParameterMessage(field.ToClampedFloat());
+                Osc.SendParameterMessage(ToClampedFloat(value));
                 OnPropertyChanged();
             }
         }
@@ -167,11 +175,79 @@ public partial class AppViewModel : ViewModelBase
         get => field;
         set
         {
-            var rounded = Math.Round(value, 2, MidpointRounding.AwayFromZero);
-            if (field != rounded)
+            if (field != value)
             {
-                field = rounded;
-                SendParameterMessage(field.ToClampedFloat());
+                field = value;
+
+                Osc.SendParameterMessage(ToClampedFloat(value));
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    #endregion
+
+    #region Eyelid
+
+    public float EyeLidRight
+    {
+        get => field;
+        set
+        {
+            if (field != value)
+            {
+                field = value;
+
+                Osc.SendParameterMessage(value.LimitDecimal(4));
+                OnPropertyChanged();
+            }
+        }
+    } = 0.75f;
+
+    public float EyeLidLeft
+    {
+        get => field;
+        set
+        {
+            if (field != value)
+            {
+                field = value;
+
+                Osc.SendParameterMessage(value.LimitDecimal(4));
+                OnPropertyChanged();
+            }
+        }
+    } = 0.75f;
+
+    #endregion
+
+    #region Eyebrow
+
+    public float BrowExpressionRight
+    {
+        get => field;
+        set
+        {
+            if (field != value)
+            {
+                field = value;
+
+                Osc.SendParameterMessage(value.LimitDecimal(4));
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public float BrowExpressionLeft
+    {
+        get => field;
+        set
+        {
+            if (field != value)
+            {
+                field = value;
+
+                Osc.SendParameterMessage(value.LimitDecimal(4));
                 OnPropertyChanged();
             }
         }

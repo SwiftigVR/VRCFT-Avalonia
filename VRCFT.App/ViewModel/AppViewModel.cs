@@ -11,7 +11,7 @@ public partial class AppViewModel : ViewModelBase
 {
     #region Window Initialize
 
-    public Window View { get; private set; } = null!;
+    private Window View { get; set; } = null!;
 
     public void Initialize()
     {
@@ -19,14 +19,15 @@ public partial class AppViewModel : ViewModelBase
         View.DataContext = this;
         View.Closing += OnClosing;
 
-        ConfigManager.LoadPosition(View);
+        ConfigManager.LoadConfig(View);
 
         View.Show();
     }
 
     private void OnClosing(object? sender, WindowClosingEventArgs e)
     {
-        ConfigManager.SavePosition(View);
+        View.Hide();
+        ConfigManager.SaveConfig(View);
     }
 
     #endregion

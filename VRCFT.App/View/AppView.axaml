@@ -32,6 +32,12 @@
 			<Setter Property="IsSnapToTickEnabled" Value="{Binding SliderTicksEnabled}" />
 			<Setter Property="TickPlacement" Value="Outside" />
 			<Setter Property="TickFrequency" Value="0.1" />
+
+			<!-- The ToolTip shows the current value when dragging the slider -->
+			<Setter Property="ToolTip.Placement" Value="Pointer" />
+			<Setter Property="ToolTip.Tip">
+				<Binding Path="Value" StringFormat="F2" RelativeSource="{RelativeSource Self}" />
+			</Setter>
 		</Style>
   	</Window.Styles>
 

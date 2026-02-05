@@ -1,9 +1,9 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Styling;
 using System;
 using System.IO;
 using System.Text.Json;
+using VRCFT.App.Model;
 
 namespace VRCFT.App.Service;
 
@@ -70,21 +70,9 @@ public static class ConfigManager
         }
 
         newConfig.State = view.WindowState;
+        newConfig.Theme = App.Current!.ActualThemeVariant;
 
         string configJson = JsonSerializer.Serialize(newConfig);
         File.WriteAllText(ConfigPath, configJson);
     }
-}
-
-public class AppConfig
-{
-    public int Top { get; set; }
-    public int Left { get; set; }
-
-    public double Width { get; set; }
-    public double Height { get; set; }
-
-    public WindowState State { get; set; }
-
-    //public ThemeVariant Theme { get; set; } = ThemeVariant.Default;
 }

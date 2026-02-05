@@ -3,7 +3,6 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using System.Linq;
-using VRCFT.App.View;
 using VRCFT.App.ViewModel;
 
 namespace VRCFT.App;

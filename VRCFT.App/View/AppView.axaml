@@ -12,13 +12,12 @@
 
 		d:DesignWidth="1100"
 		d:DesignHeight="700"
-		Height="1100"
-		Width="700"
+		Width="1100"
+		Height="700"
 
 		Icon="/Assets/VrcftTool.ico"
 		Title="AppView"
 
-		Padding="5,0,5,5"
 		Background="Transparent"
 		TransparencyLevelHint="Mica"
 		TransparencyBackgroundFallback="#222">
@@ -39,15 +38,17 @@
 				<Binding Path="Value" StringFormat="F2" RelativeSource="{RelativeSource Self}" />
 			</Setter>
 		</Style>
-  	</Window.Styles>
+	</Window.Styles>
 
 	<Grid RowSpacing="5">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
+			<RowDefinition Height="25" />
 		</Grid.RowDefinitions>
 
 		<Border Grid.Row="0"
+				Margin="5,0"
 				Padding="10"
 				BorderBrush="#444"
 				BorderThickness="1"
@@ -76,13 +77,11 @@
 
 				<CheckBox Content="Slider Ticks"
 						  IsChecked="{Binding SliderTicksEnabled, Mode=TwoWay}" />
-						  
+
 				<Rectangle Width="1"
 						   Fill="#444" />
 
-				<!-- <ComboBox Width="120"
-						  ItemsSource="{Binding AvailableThemes}"
-						  SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" /> -->
+
 
 			</StackPanel>
 		</Border>
@@ -90,7 +89,8 @@
 		<!-- UI -->
 		<Grid Grid.Row="1"
 			  ColumnSpacing="5"
-			  RowSpacing="5">
+			  RowSpacing="5"
+			  Margin="5,0">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*" />
 				<RowDefinition Height="*" />
@@ -125,6 +125,19 @@
 					CornerRadius="5">
 
 			</Border>
+
+		</Grid>
+
+		<Grid Grid.Row="2"
+			  Background="DodgerBlue">
+
+			<!--<ComboBox Width="120"
+					  MinHeight="25"
+					  Height="25"
+					  CornerRadius="0"
+					  Background="Transparent"
+					  ItemsSource="{Binding AvailableThemes}"
+					  SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" />-->
 
 		</Grid>
 

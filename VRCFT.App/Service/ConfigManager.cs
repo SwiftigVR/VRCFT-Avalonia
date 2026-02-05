@@ -15,19 +15,19 @@ public static class ConfigManager
     private static string ConfigDirectory => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ConfigFolderName);
     private static string ConfigPath => Path.Combine(ConfigDirectory, ConfigFileName);
 
-    private static AppConfig? LoadedConfig { get; set; } = null;
+    private static AppConfig? LoadedConfig { get; set; }
 
-    public static AppConfig? LoadConfig(Window view)
+    public static void LoadConfig(Window view)
     {
         if (!File.Exists(ConfigPath))
-            return null;
+            return;
 
         try
         {
             string configJson = File.ReadAllText(ConfigPath);
             LoadedConfig = JsonSerializer.Deserialize<AppConfig>(configJson);
         }
-        catch { return null; }
+        catch { return; }
 
         if (LoadedConfig != null)
         {
@@ -39,9 +39,9 @@ public static class ConfigManager
                 view.WindowState = LoadedConfig.State;
             else
                 view.WindowState = WindowState.Normal;
-        }
 
-        return LoadedConfig;
+            //App.Current!.RequestedThemeVariant = LoadedConfig.Theme;
+        }
     }
 
     public static void SaveConfig(Window view)
@@ -51,28 +51,29 @@ public static class ConfigManager
 
         var newConfig = new AppConfig();
 
-        switch (view.WindowState)
+        if (view.WindowState == WindowState.Normal)
         {
-            case WindowState.Normal:
-                newConfig.Top = view.Position.Y;
-                newConfig.Left = view.Position.X;
-                newConfig.Width = view.Width;
-                newConfig.Height = view.Height;
-                break;
-
-            case WindowState.Minimized:
-            case WindowState.Maximized:
-                newConfig.Top = LoadedConfig != null ? LoadedConfig.Top : 100;
-                newConfig.Left = LoadedConfig != null ? LoadedConfig.Left : 100;
-                newConfig.Width = LoadedConfig != null ? LoadedConfig.Width : 1100;
-                newConfig.Height = LoadedConfig != null ? LoadedConfig.Height : 700;
-                break;
+            newConfig.Top = view.Position.Y;
+            newConfig.Left = view.Position.X;
+            newConfig.Width = view.Width;
+            newConfig.Height = view.Height;
+        }
+        else
+        {
+            newConfig.Top = LoadedConfig != null ? LoadedConfig.Top : 100;
+            newConfig.Left = LoadedConfig != null ? LoadedConfig.Left : 100;
+            newConfig.Width = LoadedConfig != null ? LoadedConfig.Width : 1100;
+            newConfig.Height = LoadedConfig != null ? LoadedConfig.Height : 700;
         }
 
         newConfig.State = view.WindowState;
-        newConfig.Theme = App.Current!.ActualThemeVariant;
+        //newConfig.Theme = App.Current!.ActualThemeVariant;
 
-        string configJson = JsonSerializer.Serialize(newConfig);
-        File.WriteAllText(ConfigPath, configJson);
+        try
+        {
+            string configJson = JsonSerializer.Serialize(newConfig);
+            File.WriteAllText(ConfigPath, configJson);
+        }
+        catch { }
     }
 }

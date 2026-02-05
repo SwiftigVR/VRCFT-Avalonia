@@ -98,7 +98,7 @@
 			  Margin="5">
 			<Border Padding="8"
 					Background="#20FFFFFF"
-					CornerRadius="5"
+					CornerRadius="8"
 					VerticalAlignment="Center"
 					HorizontalAlignment="Center">
 				<Border.Width>

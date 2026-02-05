@@ -3,7 +3,7 @@
 			 x:Class="VRCFT.App.App"
 			 xmlns:local="using:VRCFT.App"
 			 xmlns:semi="https://irihi.tech/semi"
-			 RequestedThemeVariant="Dark">
+			 RequestedThemeVariant="Default">
 
 	<Application.DataTemplates>
 		<local:ViewLocator />

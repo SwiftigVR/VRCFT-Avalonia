@@ -49,6 +49,7 @@ public partial class AppViewModel : ViewModelBase
         }
     }
 
+    /*
     public List<ThemeVariant> AvailableThemes =>
     [
         ThemeVariant.Default,
@@ -68,6 +69,7 @@ public partial class AppViewModel : ViewModelBase
             }
         }
     }
+    */
 
     #endregion
 

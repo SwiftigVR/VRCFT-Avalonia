@@ -74,9 +74,9 @@
 				<Rectangle Width="1"
 						   Fill="#444" />
 
-				<ComboBox Width="120"
+				<!-- <ComboBox Width="120"
 						  ItemsSource="{Binding AvailableThemes}"
-						  SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" />
+						  SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" /> -->
 
 			</StackPanel>
 		</Border>

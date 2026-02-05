@@ -86,5 +86,5 @@ public class AppConfig
 
     public WindowState State { get; set; }
 
-    public ThemeVariant Theme { get; set; } = ThemeVariant.Default;
+    //public ThemeVariant Theme { get; set; } = ThemeVariant.Default;
 }

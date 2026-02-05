@@ -27,6 +27,13 @@
 		<vm:AppViewModel />
 	</Design.DataContext>
 
+	<Window.Styles>
+		<Style Selector="Slider">
+			<Setter Property="IsSnapToTickEnabled"
+					Value="{Binding SliderTicksEnabled}" />
+		</Style>
+  	</Window.Styles>
+
 	<Grid RowSpacing="5">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />

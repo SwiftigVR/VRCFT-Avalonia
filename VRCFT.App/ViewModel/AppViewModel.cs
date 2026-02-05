@@ -26,7 +26,6 @@ public partial class AppViewModel : ViewModelBase
 
     private void OnClosing(object? sender, WindowClosingEventArgs e)
     {
-        View.Hide();
         ConfigManager.SaveConfig(View);
     }
 
@@ -97,19 +96,6 @@ public partial class AppViewModel : ViewModelBase
             if (Osc.Enabled != value)
             {
                 Osc.Enabled = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-
-    public bool SimplifiedExpressions
-    {
-        get => field;
-        set
-        {
-            if (field != value)
-            {
-                field = value;
                 OnPropertyChanged();
             }
         }
@@ -222,6 +208,21 @@ public partial class AppViewModel : ViewModelBase
 
     #endregion
 
+    #region Simplified Expressions
+
+    public bool SimplifiedExpressions
+    {
+        get => field;
+        set
+        {
+            if (field != value)
+            {
+                field = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     #region Eyebrow
 
     public float BrowExpressionRight
@@ -253,6 +254,14 @@ public partial class AppViewModel : ViewModelBase
             }
         }
     }
+
+    #endregion
+
+    #endregion
+
+    #region Regular Expressions
+
+
 
     #endregion
 

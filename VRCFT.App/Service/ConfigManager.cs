@@ -26,22 +26,19 @@ public static class ConfigManager
             string configJson = File.ReadAllText(ConfigPath);
             LoadedConfig = JsonSerializer.Deserialize<AppConfig>(configJson);
         }
-        catch
+        catch { return; }
+
+        if (LoadedConfig != null)
         {
-            return;
+            view.Position = new PixelPoint(LoadedConfig.Left, LoadedConfig.Top);
+            view.Width = LoadedConfig.Width;
+            view.Height = LoadedConfig.Height;
+
+            if (LoadedConfig.State != WindowState.Minimized)
+                view.WindowState = LoadedConfig.State;
+            else
+                view.WindowState = WindowState.Normal;
         }
-
-        if (LoadedConfig == null)
-            return;
-
-        view.Position = new PixelPoint(LoadedConfig.Left, LoadedConfig.Top);
-        view.Width = LoadedConfig.Width;
-        view.Height = LoadedConfig.Height;
-
-        if (LoadedConfig.State != WindowState.Minimized)
-            view.WindowState = LoadedConfig.State;
-        else
-            view.WindowState = WindowState.Normal;
     }
 
     public static void SaveConfig(Window view)
@@ -51,11 +48,27 @@ public static class ConfigManager
 
         var newConfig = new AppConfig();
 
-        newConfig.Top = view.Position.Y;
-        newConfig.Left = view.Position.X;
-        newConfig.Width = view.Width;
-        newConfig.Height = view.Height;
-        newConfig.State = view.WindowState;
+        switch (view.WindowState)
+        {
+            case WindowState.Normal:
+                newConfig.Top = view.Position.Y;
+                newConfig.Left = view.Position.X;
+                newConfig.Width = view.Width;
+                newConfig.Height = view.Height;
+                newConfig.State = view.WindowState;
+                break;
+
+            case WindowState.Minimized:
+            case WindowState.Maximized:
+                newConfig.Top = LoadedConfig != null ? LoadedConfig.Top : 100;
+                newConfig.Left = LoadedConfig != null ? LoadedConfig.Left : 100;
+                newConfig.Width = LoadedConfig != null ? LoadedConfig.Width : 1100;
+                newConfig.Height = LoadedConfig != null ? LoadedConfig.Height : 700;
+                newConfig.State = view.WindowState;
+                break;
+        }
+
+
 
         string configJson = JsonSerializer.Serialize(newConfig);
         File.WriteAllText(ConfigPath, configJson);

@@ -10,8 +10,10 @@
 		x:Class="VRCFT.App.View.AppView"
 		x:DataType="vm:AppViewModel"
 
-		d:DesignWidth="1200"
+		d:DesignWidth="1100"
 		d:DesignHeight="700"
+		Height="1100"
+		Width="700"
 
 		Icon="/Assets/VrcftTool.ico"
 		Title="AppView"

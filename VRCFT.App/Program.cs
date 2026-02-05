@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Avalonia;
 
 namespace VRCFT.App;
@@ -13,12 +14,11 @@ internal sealed class Program
     {
         try
         {
-            BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-            return 0;
+            return BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
         }
-        catch //(Exception ex)
+        catch (Exception ex)
         {
-            //Console.WriteLine(ex.ToString());
+            Debug.WriteLine(ex.ToString());
             return -1;
         }
     }

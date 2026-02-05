@@ -5,13 +5,15 @@ namespace VRCFT.Debug;
 
 internal class Program
 {
+    private static bool isRunning = true;
+
     static void Main(string[] args)
     {
+        // Ctrl+C to stop the program
+        Console.CancelKeyPress += (_, _) => isRunning = false;
+
         var endPoint = new IPEndPoint(IPAddress.Loopback, 9000);
         var listener = new OscListener(endPoint);
-
-        bool isRunning = true;
-        Console.CancelKeyPress += (_, _) => isRunning = false;
 
         var listenerTask = Task.Run(async () =>
         {
@@ -22,35 +24,22 @@ internal class Program
                 if (message == null)
                     continue;
 
-                string argumentMessage = null!;
                 foreach (var arg in message.Arguments)
                 {
-                    switch (arg)
+                    string? argumentMessage = arg switch
                     {
-                        case bool:
-                            argumentMessage = (bool)arg ? "True" : "False";
-                            break;
+                        bool => (bool)arg ? "True" : "False",
+                        int => arg.ToString(),
+                        float => arg.ToString(),
+                        _ => null
+                    };
 
-                        case int:
-                            argumentMessage = arg.ToString()!;
-                            break;
-
-                        case float:
-                            argumentMessage = arg.ToString()!;
-                            break;
-
-                        case null:
-                        default:
-                            argumentMessage = null!;
-                            break;
-                    }
+                    Console.WriteLine($"Parameter: {message.Address} - Value: {argumentMessage ?? "Invalid type!"}");
                 }
-
-                Console.WriteLine($"Parameter: {message.Address} - Value: {argumentMessage ?? "Invalid type!"}");
             }
         });
 
-        while (isRunning)
+        while (!listenerTask.IsCompleted)
             Thread.Sleep(1000);
 
         listener.Dispose();

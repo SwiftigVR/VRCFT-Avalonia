@@ -1,5 +1,8 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Styling;
 using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using VRCFT.App.Service;
 using VRCFT.App.Utility;
@@ -41,6 +44,26 @@ public partial class AppViewModel : ViewModelBase
             if (field != value)
             {
                 field = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public List<ThemeVariant> AvailableThemes =>
+    [
+        ThemeVariant.Default,
+        ThemeVariant.Light,
+        ThemeVariant.Dark
+    ];
+
+    public ThemeVariant SelectedTheme
+    {
+        get => View.ActualThemeVariant ?? ThemeVariant.Default;
+        set
+        {
+            if (View.ActualThemeVariant != value)
+            {
+                View.RequestedThemeVariant = value;
                 OnPropertyChanged();
             }
         }

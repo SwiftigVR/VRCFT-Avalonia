@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Styling;
 using System;
 using System.IO;
 using System.Text.Json;
@@ -16,17 +17,17 @@ public static class ConfigManager
 
     private static AppConfig? LoadedConfig { get; set; } = null;
 
-    public static void LoadConfig(Window view)
+    public static AppConfig? LoadConfig(Window view)
     {
         if (!File.Exists(ConfigPath))
-            return;
+            return null;
 
         try
         {
             string configJson = File.ReadAllText(ConfigPath);
             LoadedConfig = JsonSerializer.Deserialize<AppConfig>(configJson);
         }
-        catch { return; }
+        catch { return null; }
 
         if (LoadedConfig != null)
         {
@@ -39,6 +40,8 @@ public static class ConfigManager
             else
                 view.WindowState = WindowState.Normal;
         }
+
+        return LoadedConfig;
     }
 
     public static void SaveConfig(Window view)
@@ -55,7 +58,6 @@ public static class ConfigManager
                 newConfig.Left = view.Position.X;
                 newConfig.Width = view.Width;
                 newConfig.Height = view.Height;
-                newConfig.State = view.WindowState;
                 break;
 
             case WindowState.Minimized:
@@ -64,11 +66,10 @@ public static class ConfigManager
                 newConfig.Left = LoadedConfig != null ? LoadedConfig.Left : 100;
                 newConfig.Width = LoadedConfig != null ? LoadedConfig.Width : 1100;
                 newConfig.Height = LoadedConfig != null ? LoadedConfig.Height : 700;
-                newConfig.State = view.WindowState;
                 break;
         }
 
-
+        newConfig.State = view.WindowState;
 
         string configJson = JsonSerializer.Serialize(newConfig);
         File.WriteAllText(ConfigPath, configJson);
@@ -84,4 +85,6 @@ public class AppConfig
     public double Height { get; set; }
 
     public WindowState State { get; set; }
+
+    public ThemeVariant Theme { get; set; } = ThemeVariant.Default;
 }

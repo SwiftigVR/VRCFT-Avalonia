@@ -29,8 +29,9 @@
 
 	<Window.Styles>
 		<Style Selector="Slider">
-			<Setter Property="IsSnapToTickEnabled"
-					Value="{Binding SliderTicksEnabled}" />
+			<Setter Property="IsSnapToTickEnabled" Value="{Binding SliderTicksEnabled}" />
+			<Setter Property="TickPlacement" Value="Outside" />
+			<Setter Property="TickFrequency" Value="0.1" />
 		</Style>
   	</Window.Styles>
 
@@ -69,6 +70,13 @@
 
 				<CheckBox Content="Slider Ticks"
 						  IsChecked="{Binding SliderTicksEnabled, Mode=TwoWay}" />
+						  
+				<Rectangle Width="1"
+						   Fill="#444" />
+
+				<ComboBox Width="120"
+						  ItemsSource="{Binding AvailableThemes}"
+						  SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" />
 
 			</StackPanel>
 		</Border>

@@ -134,7 +134,7 @@
 			<ComboBox Width="120"
 					  MinHeight="25"
 					  Height="25"
-					  CornerRadius="0"
+					  BorderBrush="Transparent"
 					  Background="Transparent"
 					  ItemsSource="{Binding AvailableThemes}"
 					  SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" />

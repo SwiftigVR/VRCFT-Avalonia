@@ -3,17 +3,19 @@
 
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key='Light'>
+
 				<SolidColorBrush x:Key="UiPrimary">#0064FA</SolidColorBrush>
 				<SolidColorBrush x:Key="UiForeground">Black</SolidColorBrush>
 				<SolidColorBrush x:Key="UiBackground">#08000000</SolidColorBrush>
-
+				<SolidColorBrush x:Key="UiBorder">#BBB</SolidColorBrush>
 
 			</ResourceDictionary>
 			<ResourceDictionary x:Key='Dark'>
+
 				<SolidColorBrush x:Key="UiPrimary">#54A9FF</SolidColorBrush>
 				<SolidColorBrush x:Key="UiForeground">White</SolidColorBrush>
 				<SolidColorBrush x:Key="UiBackground">#20FFFFFF</SolidColorBrush>
-
+				<SolidColorBrush x:Key="UiBorder">#444</SolidColorBrush>
 
 			</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>

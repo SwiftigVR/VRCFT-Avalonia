@@ -50,7 +50,7 @@
 		<Border Grid.Row="0"
 				Margin="5,0"
 				Padding="10"
-				BorderBrush="#444"
+				BorderBrush="{DynamicResource UiBorder}"
 				BorderThickness="1"
 				CornerRadius="5">
 			<StackPanel VerticalAlignment="Center"
@@ -61,27 +61,25 @@
 						  IsChecked="{Binding SendingEnabled, Mode=TwoWay}" />
 
 				<Rectangle Width="1"
-						   Fill="#444" />
+						   Fill="{DynamicResource UiBorder}" />
 
 				<CheckBox Content="Sync Left/Right Look"
 						  IsChecked="{Binding SyncEyeLook, Mode=TwoWay}" />
 
 				<Rectangle Width="1"
-						   Fill="#444" />
+						   Fill="{DynamicResource UiBorder}" />
 
 				<CheckBox Content="Use Simplified Expressions"
 						  IsChecked="{Binding SimplifiedExpressions, Mode=TwoWay}" />
 
 				<Rectangle Width="1"
-						   Fill="#444" />
+						   Fill="{DynamicResource UiBorder}" />
 
 				<CheckBox Content="Slider Ticks"
 						  IsChecked="{Binding SliderTicksEnabled, Mode=TwoWay}" />
 
 				<Rectangle Width="1"
-						   Fill="#444" />
-
-
+						   Fill="{DynamicResource UiBorder}" />
 
 			</StackPanel>
 		</Border>
@@ -102,7 +100,7 @@
 
 			<Border Grid.Row="0"
 					Grid.Column="0"
-					BorderBrush="#444"
+					BorderBrush="{DynamicResource UiBorder}"
 					BorderThickness="1"
 					CornerRadius="5">
 				<component:LeftEyeControl />
@@ -110,7 +108,7 @@
 
 			<Border Grid.Row="0"
 					Grid.Column="1"
-					BorderBrush="#444"
+					BorderBrush="{DynamicResource UiBorder}"
 					BorderThickness="1"
 					CornerRadius="5">
 				<component:RightEyeControl />
@@ -120,7 +118,7 @@
 					Grid.Column="0"
 					Grid.ColumnSpan="2"
 					Padding="10"
-					BorderBrush="#444"
+					BorderBrush="{DynamicResource UiBorder}"
 					BorderThickness="1"
 					CornerRadius="5">
 

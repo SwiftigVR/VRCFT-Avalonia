@@ -85,7 +85,7 @@
 
 		<!-- Eyelid -->
 		<Border Grid.Column="1"
-				BorderBrush="#444"
+				BorderBrush="{DynamicResource UiBorder}"
 				BorderThickness="1,0,1,0">
 			<Grid Margin="10,0">
 				<Grid.RowDefinitions>

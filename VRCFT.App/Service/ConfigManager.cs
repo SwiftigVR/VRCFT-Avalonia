@@ -40,7 +40,7 @@ public static class ConfigManager
             else
                 view.WindowState = WindowState.Normal;
 
-            //App.Current!.RequestedThemeVariant = LoadedConfig.Theme;
+            //Application.Current!.RequestedThemeVariant = LoadedConfig.Theme;
         }
     }
 
@@ -67,7 +67,7 @@ public static class ConfigManager
         }
 
         newConfig.State = view.WindowState;
-        //newConfig.Theme = App.Current!.ActualThemeVariant;
+        //newConfig.Theme = Application.Current!.ActualThemeVariant;
 
         try
         {

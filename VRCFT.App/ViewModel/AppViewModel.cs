@@ -1,6 +1,9 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Styling;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
+using System.Collections.Generic;
 using VRCFT.App.Service;
 using VRCFT.App.Utility;
 using VRCFT.App.View;
@@ -46,7 +49,6 @@ public partial class AppViewModel : ViewModelBase
         }
     }
 
-    /*
     public List<ThemeVariant> AvailableThemes =>
     [
         ThemeVariant.Light,
@@ -55,17 +57,16 @@ public partial class AppViewModel : ViewModelBase
 
     public ThemeVariant SelectedTheme
     {
-        get => App.Current!.ActualThemeVariant;
+        get => Application.Current!.ActualThemeVariant;
         set
         {
-            if (App.Current!.ActualThemeVariant != value)
+            if (Application.Current!.ActualThemeVariant != value)
             {
-                App.Current!.RequestedThemeVariant = value;
+                Application.Current!.RequestedThemeVariant = value;
                 OnPropertyChanged();
             }
         }
     }
-    */
 
     #endregion
 

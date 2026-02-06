@@ -15,15 +15,15 @@
 		<semi:AvaloniaEditSemiTheme />
 	</Application.Styles>
 
-	<!--
+	
 	<Application.Resources>
-	<ResourceDictionary>
-	<ResourceDictionary.MergedDictionaries>
-	<ResourceInclude Source="/Assets/Themes/UiColor.axaml" />
-	<ResourceInclude Source="/Assets/Themes/UiOverwrite.axaml" />
-	</ResourceDictionary.MergedDictionaries>
-	</ResourceDictionary>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceInclude Source="/Assets/Themes/UiColor.axaml" />
+				<!-- <ResourceInclude Source="/Assets/Themes/UiOverwrite.axaml" /> -->
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
 	</Application.Resources>
-	-->
+	
 
 </Application>

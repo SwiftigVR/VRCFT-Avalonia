@@ -129,15 +129,15 @@
 		</Grid>
 
 		<Grid Grid.Row="2"
-			  Background="DodgerBlue">
+			  Background="{DynamicResource UiPrimary}">
 
-			<!--<ComboBox Width="120"
+			<ComboBox Width="120"
 					  MinHeight="25"
 					  Height="25"
 					  CornerRadius="0"
 					  Background="Transparent"
 					  ItemsSource="{Binding AvailableThemes}"
-					  SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" />-->
+					  SelectedItem="{Binding SelectedTheme, Mode=TwoWay}" />
 
 		</Grid>
 

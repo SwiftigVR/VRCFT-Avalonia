@@ -100,12 +100,12 @@ public partial class AppViewModel : ViewModelBase
 
     public bool SendingEnabled
     {
-        get => Osc.Enabled;
+        get => Osc.IsEnabled;
         set
         {
-            if (Osc.Enabled != value)
+            if (Osc.IsEnabled != value)
             {
-                Osc.Enabled = value;
+                Osc.IsEnabled = value;
                 OnPropertyChanged();
             }
         }

@@ -6,7 +6,7 @@ namespace VRCFT.App.Service;
 
 public class OscManager
 {
-    public bool Enabled { get; set; } = false;
+    public bool IsEnabled { get; set; } = false;
 
     #region Send
 
@@ -33,7 +33,7 @@ public class OscManager
     /// </summary>
     public void SendMessage(object? value, [CallerMemberName] string? parameterName = null)
     {
-        if (!Enabled || string.IsNullOrEmpty(parameterName) || value == null)
+        if (!IsEnabled || string.IsNullOrEmpty(parameterName) || value == null)
             return;
 
         string fullParameter = _BasePrefix + "v2/" + parameterName;
@@ -47,7 +47,7 @@ public class OscManager
     /// </summary>
     public void SendMessage(string parameterName, object? value)
     {
-        if (!Enabled || string.IsNullOrEmpty(parameterName) || value == null)
+        if (!IsEnabled || string.IsNullOrEmpty(parameterName) || value == null)
             return;
 
         string fullParameter = _BasePrefix + "v2/" + parameterName;

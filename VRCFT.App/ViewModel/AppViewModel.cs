@@ -1,8 +1,6 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Styling;
+﻿using Avalonia.Controls;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
-using System.Collections.Generic;
 using VRCFT.App.Service;
 using VRCFT.App.Utility;
 using VRCFT.App.View;
@@ -73,43 +71,31 @@ public partial class AppViewModel : ViewModelBase
 
     #region Window Controls
 
-    public RelayCommand Minimize
+    public RelayCommand Minimize => field ??= new RelayCommand(() =>
     {
-        get => field ??= new RelayCommand(() =>
-        {
-            // minimizes the Window
-            View.WindowState = WindowState.Minimized;
-        });
-    }
+        // minimizes the Window
+        View.WindowState = WindowState.Minimized;
+    });
 
-    public RelayCommand Maximize
+    public RelayCommand Maximize => field ??= new RelayCommand(() =>
     {
-        get => field ??= new RelayCommand(() =>
-        {
-            // toggles between maximized and normal state
-            if (View.WindowState == WindowState.Maximized)
-                View.WindowState = WindowState.Normal;
-            else
-                View.WindowState = WindowState.Maximized;
-        });
-    }
+        // toggles between maximized and normal state
+        if (View.WindowState == WindowState.Maximized)
+            View.WindowState = WindowState.Normal;
+        else
+            View.WindowState = WindowState.Maximized;
+    });
 
-    public RelayCommand Close
+    public RelayCommand Close => field ??= new RelayCommand(() =>
     {
-        get => field ??= new RelayCommand(() =>
-        {
-            View.Close();
-        });
-    }
+        View.Close();
+    });
 
     #endregion
 
-    #region Paramters
+    #region Parameters
 
-    private OscManager Osc
-    {
-        get => field ??= new OscManager();
-    }
+    private OscManager Osc => field ??= new OscManager();
 
     public bool SendingEnabled
     {
@@ -139,11 +125,6 @@ public partial class AppViewModel : ViewModelBase
         }
     }
 
-    private float ToClampedFloat(double value)
-    {
-        return (float)(Math.Clamp(value, -100d, 100d) / 100d);
-    }
-
     public double EyeLeftX
     {
         get => field;
@@ -156,7 +137,9 @@ public partial class AppViewModel : ViewModelBase
                 if (SyncEyeLook)
                     EyeRightX = value;
 
-                Osc.SendParameterMessage(ToClampedFloat(value));
+                float converted = (float)(Math.Clamp(value, -100d, 100d) / 100d);
+                Osc.SendMessage(converted.LimitDecimal());
+
                 OnPropertyChanged();
             }
         }
@@ -174,7 +157,9 @@ public partial class AppViewModel : ViewModelBase
                 if (SyncEyeLook)
                     EyeLeftX = value;
 
-                Osc.SendParameterMessage(ToClampedFloat(value));
+                float converted = (float)(Math.Clamp(value, -100d, 100d) / 100d);
+                Osc.SendMessage(converted.LimitDecimal());
+
                 OnPropertyChanged();
             }
         }
@@ -189,7 +174,9 @@ public partial class AppViewModel : ViewModelBase
             {
                 field = value;
 
-                Osc.SendParameterMessage(ToClampedFloat(value));
+                float converted = (float)(Math.Clamp(value, -100d, 100d) / 100d);
+                Osc.SendMessage(converted.LimitDecimal());
+
                 OnPropertyChanged();
             }
         }
@@ -208,7 +195,7 @@ public partial class AppViewModel : ViewModelBase
             {
                 field = value;
 
-                Osc.SendParameterMessage(value.LimitDecimal(4));
+                Osc.SendMessage(value.LimitDecimal());
                 OnPropertyChanged();
             }
         }
@@ -223,7 +210,7 @@ public partial class AppViewModel : ViewModelBase
             {
                 field = value;
 
-                Osc.SendParameterMessage(value.LimitDecimal(4));
+                Osc.SendMessage(value.LimitDecimal());
                 OnPropertyChanged();
             }
         }
@@ -257,7 +244,7 @@ public partial class AppViewModel : ViewModelBase
             {
                 field = value;
 
-                Osc.SendParameterMessage(value.LimitDecimal(4));
+                Osc.SendMessage(value.LimitDecimal());
                 OnPropertyChanged();
             }
         }
@@ -272,7 +259,7 @@ public partial class AppViewModel : ViewModelBase
             {
                 field = value;
 
-                Osc.SendParameterMessage(value.LimitDecimal(4));
+                Osc.SendMessage(value.LimitDecimal());
                 OnPropertyChanged();
             }
         }

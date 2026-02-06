@@ -8,10 +8,9 @@ public class OscManager
 {
     public bool Enabled { get; set; } = false;
 
-    private const int _SendingPort = 9000;
-    private const int _ListeningPort = 9001;
-
     #region Send
+
+    private const int _SendingPort = 9000;
 
     public OscSender Sender
     {
@@ -27,17 +26,28 @@ public class OscManager
         }
     }
 
-    public void SendParameterMessage(object value, [CallerMemberName] string? parameterName = null)
-    {
-        if (!string.IsNullOrEmpty(parameterName))
-            SendMessage(parameterName, value);
-    }
-
     private const string _BasePrefix = "/avatar/parameters/";
 
-    private void SendMessage(string parameterName, object value)
+    /// <summary>
+    /// Sends an OSC message with the parameter name derived from the caller member name.
+    /// </summary>
+    public void SendMessage(object? value, [CallerMemberName] string? parameterName = null)
     {
-        if (!Enabled)
+        if (!Enabled || string.IsNullOrEmpty(parameterName) || value == null)
+            return;
+
+        string fullParameter = _BasePrefix + "v2/" + parameterName;
+        var message = new OscMessage(fullParameter, [value]);
+
+        Sender.SendAsync(message.GetBytes());
+    }
+
+    /// <summary>
+    /// Sends an OSC message with the specified parameter name.
+    /// </summary>
+    public void SendMessage(string parameterName, object? value)
+    {
+        if (!Enabled || string.IsNullOrEmpty(parameterName) || value == null)
             return;
 
         string fullParameter = _BasePrefix + "v2/" + parameterName;
@@ -49,6 +59,8 @@ public class OscManager
     #endregion
 
     #region Listen
+
+    private const int _ListeningPort = 9001;
 
     public OscListener Listener
     {

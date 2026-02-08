@@ -2,8 +2,10 @@
 using Avalonia.Controls;
 using System;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using VRCFT.App.Model;
+using VRCFT.App.ViewModel;
 
 namespace VRCFT.App.Service;
 
@@ -12,12 +14,14 @@ public static class ConfigManager
     private static string ConfigFileName => "config.json";
     private static string ConfigFolderName => "Swift's VRCFT Debug Tool";
 
-    private static string ConfigDirectory => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ConfigFolderName);
-    private static string ConfigPath => Path.Combine(ConfigDirectory, ConfigFileName);
+    public static string ConfigDirectory => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), ConfigFolderName);
+    public static string ConfigPath => Path.Combine(ConfigDirectory, ConfigFileName);
 
-    private static AppConfig? LoadedConfig { get; set; }
+    public static AppConfig Config { get; private set; } = new();
 
-    public static void LoadConfig(Window view)
+    private static JsonSerializerOptions _options = null!;
+
+    public static void LoadConfig()
     {
         if (!File.Exists(ConfigPath))
             return;
@@ -25,55 +29,66 @@ public static class ConfigManager
         try
         {
             string configJson = File.ReadAllText(ConfigPath);
-            LoadedConfig = JsonSerializer.Deserialize<AppConfig>(configJson);
+            var savedConfig = JsonSerializer.Deserialize<AppConfig>(configJson);
+
+            if (savedConfig != null)
+                Config = savedConfig;
         }
-        catch { return; }
-
-        if (LoadedConfig != null)
-        {
-            view.Position = new PixelPoint(LoadedConfig.Left, LoadedConfig.Top);
-            view.Width = LoadedConfig.Width;
-            view.Height = LoadedConfig.Height;
-
-            if (LoadedConfig.State != WindowState.Minimized)
-                view.WindowState = LoadedConfig.State;
-            else
-                view.WindowState = WindowState.Normal;
-
-            //Application.Current!.RequestedThemeVariant = LoadedConfig.Theme;
-        }
+        catch { }
     }
 
-    public static void SaveConfig(Window view)
+    public static void SaveConfig()
     {
         if (!Directory.Exists(ConfigDirectory))
             Directory.CreateDirectory(ConfigDirectory);
 
-        var newConfig = new AppConfig();
-
-        if (view.WindowState == WindowState.Normal)
-        {
-            newConfig.Top = view.Position.Y;
-            newConfig.Left = view.Position.X;
-            newConfig.Width = view.Width;
-            newConfig.Height = view.Height;
-        }
-        else
-        {
-            newConfig.Top = LoadedConfig != null ? LoadedConfig.Top : 100;
-            newConfig.Left = LoadedConfig != null ? LoadedConfig.Left : 100;
-            newConfig.Width = LoadedConfig != null ? LoadedConfig.Width : 1100;
-            newConfig.Height = LoadedConfig != null ? LoadedConfig.Height : 700;
-        }
-
-        newConfig.State = view.WindowState;
-        //newConfig.Theme = Application.Current!.ActualThemeVariant;
-
         try
         {
-            string configJson = JsonSerializer.Serialize(newConfig);
+            _options ??= new JsonSerializerOptions()
+            {
+                WriteIndented = true,
+            };
+
+            string configJson = JsonSerializer.Serialize(Config, _options);
             File.WriteAllText(ConfigPath, configJson);
         }
         catch { }
     }
+
+    #region Windows
+
+    public static void LoadWindowFromConfig(string viewModelName, Window view)
+    {
+        if (!Config.Windows.ContainsKey(viewModelName))
+            return;
+
+        var config = Config.Windows[viewModelName];
+        if (config == null)
+            return;
+
+        view.Position = new PixelPoint(config.Left, config.Top);
+        view.Width = config.Width;
+        view.Height = config.Height;
+
+        if (config.State == WindowState.Minimized)
+            view.WindowState = WindowState.Normal;
+    }
+
+    public static void SaveWindowToConfig(string viewModelName, Window view)
+    {
+        bool normalState = view.WindowState == WindowState.Normal;
+
+        var config = new WindowConfig()
+        {
+            Top = normalState ? view.Position.Y : 100,
+            Left = normalState ? view.Position.X : 100,
+            Width = normalState ? view.Width : 1100,
+            Height = normalState ? view.Height : 700,
+            State = view.WindowState
+        };
+
+        Config.Windows[viewModelName] = config;
+    }
+
+    #endregion
 }

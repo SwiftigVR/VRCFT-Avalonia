@@ -1,17 +1,23 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Styling;
+using System.Collections.Generic;
 
 namespace VRCFT.App.Model;
 
 public class AppConfig
 {
-    public int Top { get; set; }
-    public int Left { get; set; }
+    public Dictionary<string, WindowConfig> Windows { get; set; } = [];
 
-    public double Width { get; set; }
-    public double Height { get; set; }
+    public string OscParamterPrefix { get; set; } = string.Empty;
+}
 
-    public WindowState State { get; set; }
+public class WindowConfig
+{
+    public int Top { get; set; } = 100;
+    public int Left { get; set; } = 100;
 
-    public ThemeVariant Theme { get; set; } = ThemeVariant.Default;
+    public double Width { get; set; } = 1100;
+    public double Height { get; set; } = 700;
+
+    public WindowState State { get; set; } = WindowState.Normal;
 }

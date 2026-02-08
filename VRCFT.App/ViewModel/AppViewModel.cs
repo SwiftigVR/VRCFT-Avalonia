@@ -1,9 +1,10 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Styling;
-using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using VRCFT.App.Model;
 using VRCFT.App.Service;
 using VRCFT.App.Utility;
 using VRCFT.App.View;
@@ -22,15 +23,18 @@ public partial class AppViewModel : ViewModelBase
         View.DataContext = this;
         View.Closing += OnClosing;
 
-        ConfigManager.LoadConfig(View);
+        LoadWindowState();
 
         View.Show();
     }
 
     private void OnClosing(object? sender, WindowClosingEventArgs e)
     {
-        ConfigManager.SaveConfig(View);
+        SaveWindowState();
     }
+
+    private void LoadWindowState() => ConfigManager.LoadWindowFromConfig(nameof(AppViewModel), View);
+    private void SaveWindowState() => ConfigManager.SaveWindowToConfig(nameof(AppViewModel), View);
 
     #endregion
 
@@ -49,24 +53,10 @@ public partial class AppViewModel : ViewModelBase
         }
     }
 
-    public List<ThemeVariant> AvailableThemes =>
-    [
-        ThemeVariant.Light,
-        ThemeVariant.Dark
-    ];
-
-    public ThemeVariant SelectedTheme
+    public RelayCommand OpenAppData => field ??= new RelayCommand(() =>
     {
-        get => Application.Current!.ActualThemeVariant;
-        set
-        {
-            if (Application.Current!.ActualThemeVariant != value)
-            {
-                Application.Current!.RequestedThemeVariant = value;
-                OnPropertyChanged();
-            }
-        }
-    }
+        WindowsUtils.OpenFolderAndSelectItem(ConfigManager.ConfigPath);
+    });
 
     #endregion
 
@@ -106,6 +96,20 @@ public partial class AppViewModel : ViewModelBase
             if (Osc.IsEnabled != value)
             {
                 Osc.IsEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public string ParameterPrefix
+    {
+        get => Osc.ParameterPrefix;
+        set
+        {
+            if (Osc.ParameterPrefix != value)
+            {
+                Osc.ParameterPrefix = value;
+                ConfigManager.Config.OscParamterPrefix = value;
                 OnPropertyChanged();
             }
         }

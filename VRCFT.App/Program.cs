@@ -1,6 +1,6 @@
-﻿using System;
-using System.Diagnostics;
-using Avalonia;
+﻿using Avalonia;
+using System;
+using VRCFT.App.Service;
 
 namespace VRCFT.App;
 
@@ -14,11 +14,15 @@ internal sealed class Program
     {
         try
         {
-            return BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+            OnAppStartup();
+            int exitCode = BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+            OnAppExit();
+
+            return exitCode;
         }
-        catch (Exception ex)
+        catch //(Exception ex)
         {
-            Debug.WriteLine(ex.ToString());
+            //Debug.WriteLine(ex.ToString());
             return -1;
         }
     }
@@ -29,11 +33,18 @@ internal sealed class Program
         var builder = AppBuilder.Configure<App>()
                                 .UsePlatformDetect()
                                 .WithInterFont()
-#if DEBUG
-                                //.WithDeveloperTools()
-#endif
                                 .LogToTrace();
 
         return builder;
+    }
+
+    private static void OnAppStartup()
+    {
+        ConfigManager.LoadConfig();
+    }
+
+    private static void OnAppExit()
+    {
+        ConfigManager.SaveConfig();
     }
 }

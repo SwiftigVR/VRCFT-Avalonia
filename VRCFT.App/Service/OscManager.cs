@@ -28,6 +28,8 @@ public class OscManager
 
     private const string _BasePrefix = "/avatar/parameters/";
 
+    public string ParameterPrefix { get; set; } = ConfigManager.Config.OscParamterPrefix;
+
     /// <summary>
     /// Sends an OSC message with the parameter name derived from the caller member name.
     /// </summary>
@@ -36,9 +38,14 @@ public class OscManager
         if (!IsEnabled || string.IsNullOrEmpty(parameterName) || value == null)
             return;
 
-        string fullParameter = _BasePrefix + "v2/" + parameterName;
-        var message = new OscMessage(fullParameter, [value]);
+        string fullParameter = _BasePrefix;
 
+        if (!string.IsNullOrEmpty(ParameterPrefix))
+            fullParameter += ParameterPrefix + "/";
+
+        fullParameter += "v2/" + parameterName;
+
+        var message = new OscMessage(fullParameter, [value]);
         Sender.SendAsync(message.GetBytes());
     }
 

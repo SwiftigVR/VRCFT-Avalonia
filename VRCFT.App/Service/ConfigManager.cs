@@ -2,10 +2,8 @@
 using Avalonia.Controls;
 using System;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
 using VRCFT.App.Model;
-using VRCFT.App.ViewModel;
 
 namespace VRCFT.App.Service;
 

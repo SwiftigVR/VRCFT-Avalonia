@@ -1,10 +1,5 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Styling;
+﻿using Avalonia.Controls;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using VRCFT.App.Model;
 using VRCFT.App.Service;
 using VRCFT.App.Utility;
 using VRCFT.App.View;

@@ -1,5 +1,4 @@
 ﻿using Avalonia.Controls;
-using Avalonia.Styling;
 using System.Collections.Generic;
 
 namespace VRCFT.App.Model;

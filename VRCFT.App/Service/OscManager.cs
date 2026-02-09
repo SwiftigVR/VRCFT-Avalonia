@@ -8,16 +8,21 @@ public class OscManager
 {
     #region Send
 
-    private const int _SendingPort = 9000;
+    private int _usedSenderPort;
 
     public OscSender Sender
     {
         get
         {
-            if (field == null)
+            if (field == null || _usedSenderPort != ConfigManager.Config.OscSendingPort)
             {
-                var endPoint = new IPEndPoint(IPAddress.Loopback, _SendingPort);
+                if (field != null)
+                    field.Dispose();
+
+                var endPoint = new IPEndPoint(IPAddress.Loopback, ConfigManager.Config.OscSendingPort);
                 field = new OscSender(endPoint);
+
+                _usedSenderPort = endPoint.Port;
             }
 
             return field;
@@ -68,16 +73,21 @@ public class OscManager
 
     #region Listen
 
-    private const int _ListeningPort = 9001;
+    private int _usedListeningPort;
 
     public OscListener Listener
     {
         get
         {
-            if (field == null)
+            if (field == null || _usedListeningPort != ConfigManager.Config.OscListeningPort)
             {
-                var endPoint = new IPEndPoint(IPAddress.Loopback, _ListeningPort);
+                if (field != null)
+                    field.Dispose();
+
+                var endPoint = new IPEndPoint(IPAddress.Loopback, ConfigManager.Config.OscListeningPort);
                 field = new OscListener(endPoint);
+
+                _usedSenderPort = endPoint.Port;
             }
 
             return field;

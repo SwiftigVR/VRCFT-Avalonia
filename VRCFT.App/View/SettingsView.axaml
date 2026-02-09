@@ -55,11 +55,43 @@
 				<StackPanel Orientation="Horizontal"
 							Spacing="5">
 
-					<Label VerticalAlignment="Center">
+					<Label VerticalAlignment="Center"
+						   Width="130">
+						Osc Sending Port:
+					</Label>
+					<NumericUpDown Width="100"
+								   Minimum="1"
+								   Maximum="65535"
+								   Increment="1"
+								   FormatString="0"
+								   Value="{Binding OscSendingPort, Mode=TwoWay}" />
+
+				</StackPanel>
+
+				<StackPanel Orientation="Horizontal"
+							Spacing="5">
+
+					<Label VerticalAlignment="Center"
+						   Width="130">
+						Osc Listening Port:
+					</Label>
+					<NumericUpDown Width="100"
+								   Minimum="1"
+								   Maximum="65535"
+								   Increment="1"
+								   FormatString="0"
+								   Value="{Binding OscReceivingPort, Mode=TwoWay}" />
+
+				</StackPanel>
+
+				<StackPanel Orientation="Horizontal"
+							Spacing="5">
+
+					<Label VerticalAlignment="Center"
+						   Width="130">
 						Parameter Prefix:
 					</Label>
 					<TextBox Width="100"
-							 Height="25"
 							 Text="{Binding ParameterPrefix, Mode=TwoWay}" />
 
 				</StackPanel>

@@ -49,6 +49,32 @@ public class SettingsViewModel : ViewModelBase
         }
     }
 
+    public int OscSendingPort
+    {
+        get => ConfigManager.Config.OscSendingPort;
+        set
+        {
+            if (ConfigManager.Config.OscSendingPort != value)
+            {
+                ConfigManager.Config.OscSendingPort = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public int OscReceivingPort
+    {
+        get => ConfigManager.Config.OscListeningPort;
+        set
+        {
+            if (ConfigManager.Config.OscListeningPort != value)
+            {
+                ConfigManager.Config.OscListeningPort = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public bool SyncEyeLook
     {
         get => ConfigManager.Config.OscSyncEyeLook;

@@ -178,7 +178,7 @@ public partial class AppViewModel : ViewModelBase
 
     #region Eyebrow
 
-    public float BrowExpressionRight
+    public float BrowDownRight
     {
         get => field;
         set
@@ -193,7 +193,37 @@ public partial class AppViewModel : ViewModelBase
         }
     }
 
-    public float BrowExpressionLeft
+    public float BrowDownLeft
+    {
+        get => field;
+        set
+        {
+            if (field != value)
+            {
+                field = value;
+
+                Osc.SendMessage(value.LimitDecimal());
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public float BrowOuterUp
+    {
+        get => field;
+        set
+        {
+            if (field != value)
+            {
+                field = value;
+
+                Osc.SendMessage(value.LimitDecimal());
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public float BrowInnerUp
     {
         get => field;
         set

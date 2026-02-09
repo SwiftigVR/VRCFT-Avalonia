@@ -9,6 +9,9 @@ public class AppConfig
 
     public bool SliderTicksEnabled { get; set; } = false;
 
+    public int OscSendingPort { get; set; } = 9000;
+    public int OscListeningPort { get; set; } = 9001;
+
     public string OscParamterPrefix { get; set; } = string.Empty;
     public bool OscSyncEyeLook { get; set; } = false;
     public bool OscSimplifiedExpressions { get; set; } = false;

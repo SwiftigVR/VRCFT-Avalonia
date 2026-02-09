@@ -1,5 +1,4 @@
 ﻿using Avalonia.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using VRCFT.App.Service;
 using VRCFT.App.Utility;
@@ -37,10 +36,7 @@ public partial class AppViewModel : ViewModelBase
 
     #region UI
 
-    public bool SliderTicksEnabled
-    {
-        get => ConfigManager.Config.SliderTicksEnabled;
-    }
+    public bool SliderTicksEnabled => ConfigManager.Config.SliderTicksEnabled;
 
     public RelayCommand OpenSettings => field ??= new RelayCommand(() =>
     {

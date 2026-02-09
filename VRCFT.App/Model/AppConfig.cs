@@ -7,7 +7,11 @@ public class AppConfig
 {
     public Dictionary<string, WindowConfig> Windows { get; set; } = [];
 
+    public bool SliderTicksEnabled { get; set; } = false;
+
     public string OscParamterPrefix { get; set; } = string.Empty;
+    public bool OscSyncEyeLook { get; set; } = false;
+    public bool OscSimplifiedExpressions { get; set; } = false;
 }
 
 public class WindowConfig

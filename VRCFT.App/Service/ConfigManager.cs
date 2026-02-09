@@ -70,18 +70,20 @@ public static class ConfigManager
 
         if (config.State == WindowState.Minimized)
             view.WindowState = WindowState.Normal;
+        else
+            view.WindowState = config.State;
     }
 
     public static void SaveWindowToConfig(string viewModelName, Window view)
     {
-        bool normalState = view.WindowState == WindowState.Normal;
+        bool isNormalState = view.WindowState == WindowState.Normal;
 
         var config = new WindowConfig()
         {
-            Top = normalState ? view.Position.Y : 100,
-            Left = normalState ? view.Position.X : 100,
-            Width = normalState ? view.Width : 1100,
-            Height = normalState ? view.Height : 700,
+            Top = isNormalState ? view.Position.Y : 100,
+            Left = isNormalState ? view.Position.X : 100,
+            Width = isNormalState ? view.Width : 1100,
+            Height = isNormalState ? view.Height : 700,
             State = view.WindowState
         };
 

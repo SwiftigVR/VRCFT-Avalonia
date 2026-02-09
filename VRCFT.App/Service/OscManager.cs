@@ -6,8 +6,6 @@ namespace VRCFT.App.Service;
 
 public class OscManager
 {
-    public bool IsEnabled { get; set; } = false;
-
     #region Send
 
     private const int _SendingPort = 9000;
@@ -28,20 +26,18 @@ public class OscManager
 
     private const string _BasePrefix = "/avatar/parameters/";
 
-    public string ParameterPrefix { get; set; } = ConfigManager.Config.OscParamterPrefix;
-
     /// <summary>
     /// Sends an OSC message with the parameter name derived from the caller member name.
     /// </summary>
     public void SendMessage(object? value, [CallerMemberName] string? parameterName = null)
     {
-        if (!IsEnabled || string.IsNullOrEmpty(parameterName) || value == null)
+        if (string.IsNullOrEmpty(parameterName) || value == null)
             return;
 
         string fullParameter = _BasePrefix;
 
-        if (!string.IsNullOrEmpty(ParameterPrefix))
-            fullParameter += ParameterPrefix + "/";
+        if (!string.IsNullOrEmpty(ConfigManager.Config.OscParamterPrefix))
+            fullParameter += ConfigManager.Config.OscParamterPrefix + "/";
 
         fullParameter += "v2/" + parameterName;
 
@@ -54,12 +50,17 @@ public class OscManager
     /// </summary>
     public void SendMessage(string parameterName, object? value)
     {
-        if (!IsEnabled || string.IsNullOrEmpty(parameterName) || value == null)
+        if (string.IsNullOrEmpty(parameterName) || value == null)
             return;
 
-        string fullParameter = _BasePrefix + "v2/" + parameterName;
-        var message = new OscMessage(fullParameter, [value]);
+        string fullParameter = _BasePrefix;
 
+        if (!string.IsNullOrEmpty(ConfigManager.Config.OscParamterPrefix))
+            fullParameter += ConfigManager.Config.OscParamterPrefix + "/";
+
+        fullParameter += "v2/" + parameterName;
+
+        var message = new OscMessage(fullParameter, [value]);
         Sender.SendAsync(message.GetBytes());
     }
 

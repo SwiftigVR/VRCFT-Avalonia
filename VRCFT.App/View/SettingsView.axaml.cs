@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace VRCFT.App.View;
 
-public partial class DebugView : Window
+public partial class SettingsView : Window
 {
-    public DebugView()
+    public SettingsView()
     {
         InitializeComponent();
     }

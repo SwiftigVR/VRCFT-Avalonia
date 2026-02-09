@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using System;
+using VRCFT.App.Service;
 using VRCFT.App.Utility;
 using VRCFT.App.ViewModel;
 
@@ -46,8 +47,5 @@ public partial class RightEyeControl : UserControl
 
         vm.EyeRightX = 0;
         vm.EyeY = 0;
-
-        if (vm.SyncEyeLook)
-            vm.EyeLeftX = 0;
     }
 }

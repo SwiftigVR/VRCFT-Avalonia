@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using VRCFT.App.Service;
 using VRCFT.App.Utility;
@@ -19,6 +20,7 @@ public partial class AppViewModel : ViewModelBase
         View.Closing += OnClosing;
 
         LoadWindowState();
+        SetMainWindow(View);
 
         View.Show();
     }
@@ -37,16 +39,14 @@ public partial class AppViewModel : ViewModelBase
 
     public bool SliderTicksEnabled
     {
-        get => field;
-        set
-        {
-            if (field != value)
-            {
-                field = value;
-                OnPropertyChanged();
-            }
-        }
+        get => ConfigManager.Config.SliderTicksEnabled;
     }
+
+    public RelayCommand OpenSettings => field ??= new RelayCommand(() =>
+    {
+        var settingsViewModel = new SettingsViewModel();
+        settingsViewModel.Initialize();
+    });
 
     public RelayCommand OpenAppData => field ??= new RelayCommand(() =>
     {
@@ -83,47 +83,7 @@ public partial class AppViewModel : ViewModelBase
 
     private OscManager Osc => field ??= new OscManager();
 
-    public bool SendingEnabled
-    {
-        get => Osc.IsEnabled;
-        set
-        {
-            if (Osc.IsEnabled != value)
-            {
-                Osc.IsEnabled = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-
-    public string ParameterPrefix
-    {
-        get => Osc.ParameterPrefix;
-        set
-        {
-            if (Osc.ParameterPrefix != value)
-            {
-                Osc.ParameterPrefix = value;
-                ConfigManager.Config.OscParamterPrefix = value;
-                OnPropertyChanged();
-            }
-        }
-    }
-
     #region Eye Look
-
-    public bool SyncEyeLook
-    {
-        get => field;
-        set
-        {
-            if (field != value)
-            {
-                field = value;
-                OnPropertyChanged();
-            }
-        }
-    }
 
     public double EyeLeftX
     {
@@ -134,7 +94,7 @@ public partial class AppViewModel : ViewModelBase
             {
                 field = value;
 
-                if (SyncEyeLook)
+                if (ConfigManager.Config.OscSyncEyeLook)
                     EyeRightX = value;
 
                 float converted = (float)(Math.Clamp(value, -100d, 100d) / 100d);
@@ -154,7 +114,7 @@ public partial class AppViewModel : ViewModelBase
             {
                 field = value;
 
-                if (SyncEyeLook)
+                if (ConfigManager.Config.OscSyncEyeLook)
                     EyeLeftX = value;
 
                 float converted = (float)(Math.Clamp(value, -100d, 100d) / 100d);
@@ -219,19 +179,6 @@ public partial class AppViewModel : ViewModelBase
     #endregion
 
     #region Simplified Expressions
-
-    public bool SimplifiedExpressions
-    {
-        get => field;
-        set
-        {
-            if (field != value)
-            {
-                field = value;
-                OnPropertyChanged();
-            }
-        }
-    }
 
     #region Eyebrow
 

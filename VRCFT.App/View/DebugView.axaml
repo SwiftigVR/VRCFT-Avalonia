@@ -6,7 +6,7 @@
 
 		xmlns:vm="using:VRCFT.App.ViewModel"
 
-		x:Class="VRCFT.App.DebugView"
+		x:Class="VRCFT.App.View.DebugView"
 		x:DataType="vm:AppViewModel"
 
 		Width="600"

@@ -52,15 +52,17 @@
 						Orientation="Vertical"
 						Spacing="5">
 
-				<WrapPanel ItemSpacing="5">
+				<StackPanel Orientation="Horizontal"
+							Spacing="5">
+
 					<Label VerticalAlignment="Center">
 						Parameter Prefix:
 					</Label>
-
-					<TextBox Width="120"
+					<TextBox Width="100"
 							 Height="25"
 							 Text="{Binding ParameterPrefix, Mode=TwoWay}" />
-				</WrapPanel>
+
+				</StackPanel>
 
 			</StackPanel>
 

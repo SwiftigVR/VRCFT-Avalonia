@@ -15,6 +15,12 @@ namespace VRCFT.App.Utility
 
         public static void OpenFolderAndSelectItem(string filePath)
         {
+            if (!OperatingSystem.IsWindows())
+            {
+                Console.WriteLine("OpenFolderAndSelectItem is only supported on Windows!");
+                return;
+            }
+
             filePath = Path.GetFullPath(filePath); // Resolve absolute path
             string folderPath = Path.GetDirectoryName(filePath)!;
             string file = Path.GetFileName(filePath);

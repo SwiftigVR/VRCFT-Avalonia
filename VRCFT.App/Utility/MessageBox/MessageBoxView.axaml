@@ -1,0 +1,82 @@
+<Window xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		mc:Ignorable="d"
+
+		xmlns:vm="using:VRCFT.App.Utility.MessageBox"
+
+		x:Class="VRCFT.App.Utility.MessageBox.MessageBoxView"
+		x:DataType="vm:MessageBoxViewModel"
+
+		d:DesignWidth="250"
+		d:DesignHeight="150"
+		Width="NaN"
+		Height="NaN"
+
+		Icon="/Assets/VrcftTool.ico"
+		Title="{Binding Title}"
+
+		CanMinimize="False"
+		CanMaximize="False"
+
+		Padding="5,0,5,5"
+		Background="Transparent"
+		TransparencyLevelHint="Mica"
+		TransparencyBackgroundFallback="#222">
+
+	<Grid RowSpacing="5">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<Border Grid.Row="0"
+				Padding="15"
+				BorderBrush="{DynamicResource UiBorder}"
+				BorderThickness="1"
+				CornerRadius="5">
+
+			<StackPanel VerticalAlignment="Center"
+						HorizontalAlignment="Center"
+						Orientation="Horizontal"
+						Spacing="15">
+
+				<Rectangle Width="60" Height="60"
+						   Fill="#666" />
+
+				<Label VerticalContentAlignment="Center"
+					   Content="{Binding Text}" />
+
+			</StackPanel>
+
+		</Border>
+
+		<Border Grid.Row="1"
+				Padding="5"
+				BorderBrush="{DynamicResource UiBorder}"
+				BorderThickness="1"
+				CornerRadius="5">
+
+			<StackPanel Orientation="Horizontal"
+						Spacing="5">
+
+				<Button Classes="Danger">
+					No
+				</Button>
+
+				<Button Classes="Tertiary">
+					Cancel
+				</Button>
+
+				<Button Classes="Success">
+					Yes
+				</Button>
+
+			</StackPanel>
+
+		</Border>
+
+	</Grid>
+
+</Window>

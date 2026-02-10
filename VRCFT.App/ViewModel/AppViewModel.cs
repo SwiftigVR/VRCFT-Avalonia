@@ -1,9 +1,9 @@
 ﻿using Avalonia.Controls;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using VRCFT.App.Service;
 using VRCFT.App.Utility;
+using VRCFT.App.Utility.MessageBox;
 using VRCFT.App.View;
 
 namespace VRCFT.App.ViewModel;
@@ -28,20 +28,17 @@ public partial class AppViewModel : ViewModelBase
 
     private void OnClosing(object? sender, WindowClosingEventArgs e)
     {
-        if (true)
+        var result = MessageBox.Show
+        (
+            "Test Message",
+            $"This is a test message!{Environment.NewLine}Ignore it...",
+            MessageBoxIcon.Question
+        );
+
+        if (result != MessageBoxResult.No)
         {
-            var result = MessageBox.Show
-            (
-                "Test Message",
-                $"This is a test message!{Environment.NewLine}Ignore it...",
-                MessageBoxIcon.Question
-            );
-            
-            if (result != MessageBoxResult.No)
-            {
-                e.Cancel = true;
-                return;
-            }
+            e.Cancel = true;
+            return;
         }
 
         SaveWindowState();
@@ -63,11 +60,6 @@ public partial class AppViewModel : ViewModelBase
     public RelayCommand OpenAppData => field ??= new RelayCommand(() =>
     {
         WindowsUtils.OpenFolderAndSelectItem(ConfigManager.ConfigPath);
-    });
-
-    public AsyncRelayCommand Test => field ??= new AsyncRelayCommand(async _ =>
-    {
-        await Task.Delay(150);
     });
 
     #endregion

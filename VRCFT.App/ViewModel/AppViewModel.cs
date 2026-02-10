@@ -28,6 +28,17 @@ public partial class AppViewModel : ViewModelBase
 
     private void OnClosing(object? sender, WindowClosingEventArgs e)
     {
+        if (true)
+        {
+            var result = MessageBox.Show("Test Message", $"This is a test message!{Environment.NewLine}Ignore it...", MessageBoxIcon.Question);
+
+            if (result != MessageBoxResult.No)
+            {
+                e.Cancel = true;
+                return;
+            }
+        }
+
         SaveWindowState();
     }
 

@@ -2,7 +2,7 @@ using Avalonia.Controls;
 
 namespace VRCFT.App.Utility;
 
-public static class MessageBox
+public class MessageBox
 {
     private static Window View = null!;
 
@@ -10,25 +10,28 @@ public static class MessageBox
     {
         View = new Window();
 
+        var messageBoxContext = new MessageBox();
+        View.DataContext = messageBoxContext;
+
         var mainWindow = ViewModelBase.GetMainWindow();
         View.ShowDialog(mainWindow!);
 
-        return Result;
+        return messageBoxContext.Result;
     }
 
-    private static MessageBoxResult Result { get; set; }
+    private MessageBoxResult Result { get; set; }
 
-    public static RelayCommand ResultYes => field ??= new RelayCommand(() =>
+    public RelayCommand ResultYes => field ??= new RelayCommand(() =>
     {
 
     });
 
-    public static RelayCommand ResultCancel => field ??= new RelayCommand(() =>
+    public RelayCommand ResultCancel => field ??= new RelayCommand(() =>
     {
 
     });
 
-    public static RelayCommand ResultNo => field ??= new RelayCommand(() =>
+    public RelayCommand ResultNo => field ??= new RelayCommand(() =>
     {
 
     });

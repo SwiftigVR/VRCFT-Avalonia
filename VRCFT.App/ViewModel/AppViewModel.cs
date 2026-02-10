@@ -30,8 +30,13 @@ public partial class AppViewModel : ViewModelBase
     {
         if (true)
         {
-            var result = MessageBox.Show("Test Message", $"This is a test message!{Environment.NewLine}Ignore it...", MessageBoxIcon.Question);
-
+            var result = MessageBox.Show
+            (
+                "Test Message",
+                $"This is a test message!{Environment.NewLine}Ignore it...",
+                MessageBoxIcon.Question
+            );
+            
             if (result != MessageBoxResult.No)
             {
                 e.Cancel = true;

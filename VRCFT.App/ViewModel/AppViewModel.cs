@@ -36,8 +36,6 @@ public partial class AppViewModel : ViewModelBase
 
     #region UI
 
-    public bool SliderTicksEnabled => ConfigManager.Config.SliderTicksEnabled;
-
     public RelayCommand OpenSettings => field ??= new RelayCommand(() =>
     {
         var settingsViewModel = new SettingsViewModel();

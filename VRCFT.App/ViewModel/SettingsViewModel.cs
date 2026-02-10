@@ -1,6 +1,4 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
 using VRCFT.App.Service;
 using VRCFT.App.Utility;
 using VRCFT.App.View;
@@ -21,7 +19,8 @@ public class SettingsViewModel : ViewModelBase
 
         LoadWindowState();
 
-        View.ShowDialog(GetMainWindow()!);
+        var mainWindow = GetMainWindow();
+        View.ShowDialog(mainWindow!);
     }
 
     private void OnClosing(object? sender, WindowClosingEventArgs e)

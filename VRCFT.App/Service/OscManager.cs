@@ -87,7 +87,7 @@ public class OscManager
                 var endPoint = new IPEndPoint(IPAddress.Loopback, ConfigManager.Config.OscListeningPort);
                 field = new OscListener(endPoint);
 
-                _usedSenderPort = endPoint.Port;
+                _usedListeningPort = endPoint.Port;
             }
 
             return field;

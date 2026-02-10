@@ -10,7 +10,7 @@
 			 x:Class="VRCFT.App.ViewComponent.LeftEyeControl"
 			 x:DataType="vm:AppViewModel"
 
-			 d:DesignWidth="600"
+			 d:DesignWidth="500"
 			 d:DesignHeight="350">
 
 	<UserControl.Resources>
@@ -54,8 +54,9 @@
 
 				<Slider Orientation="Vertical"
 						Margin="0,5"
-						Minimum="-1"
-						Maximum="1" />
+						Minimum="0"
+						Maximum="1"
+						Value="1" />
 
 				<Slider Orientation="Vertical"
 						Margin="0,5"

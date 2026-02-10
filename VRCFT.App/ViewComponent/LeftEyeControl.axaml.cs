@@ -1,7 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using System;
-using VRCFT.App.Service;
 using VRCFT.App.Utility;
 using VRCFT.App.ViewModel;
 

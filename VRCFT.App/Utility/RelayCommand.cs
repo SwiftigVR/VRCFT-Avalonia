@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace VRCFT.App.Utility;
@@ -66,4 +67,35 @@ public class RelayCommand<T> : ICommand
     }
 
     #endregion Properties / Constructor
+}
+
+public class AsyncRelayCommand : ICommand
+{
+    #region ICommand Members
+
+    public event EventHandler? CanExecuteChanged;
+
+    public bool CanExecute(object? parameter) => CanExecuteMethode == null || CanExecuteMethode(parameter);
+    public async void Execute(object? parameter) => await ExecuteMethode(parameter);
+
+    public void RaiseCanExecuteChanged()
+    {
+        Volatile.Read(ref CanExecuteChanged)?.Invoke(this, EventArgs.Empty);
+    }
+
+    #endregion
+
+    #region Properties / Constructor
+
+    private Predicate<object?> CanExecuteMethode { get; set; }
+    private Func<object?, Task> ExecuteMethode { get; set; }
+
+    public AsyncRelayCommand(Func<object?, Task> executeMethode) : this(executeMethode, canExecuteMethode: null!) { }
+    public AsyncRelayCommand(Func<object?, Task> executeMethode, Predicate<object?> canExecuteMethode)
+    {
+        this.ExecuteMethode = executeMethode;
+        this.CanExecuteMethode = canExecuteMethode;
+    }
+
+    #endregion
 }

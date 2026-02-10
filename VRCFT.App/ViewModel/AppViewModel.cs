@@ -1,5 +1,7 @@
 ﻿using Avalonia.Controls;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using VRCFT.App.Service;
 using VRCFT.App.Utility;
 using VRCFT.App.View;
@@ -45,6 +47,11 @@ public partial class AppViewModel : ViewModelBase
     public RelayCommand OpenAppData => field ??= new RelayCommand(() =>
     {
         WindowsUtils.OpenFolderAndSelectItem(ConfigManager.ConfigPath);
+    });
+
+    public AsyncRelayCommand Test => field ??= new AsyncRelayCommand(async _ =>
+    {
+        await Task.Delay(150);
     });
 
     #endregion

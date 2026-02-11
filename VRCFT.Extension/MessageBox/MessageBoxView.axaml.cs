@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace VRCFT.App.Utility.MessageBox;
+namespace VRCFT.Extension.MessageBox;
 
 public partial class MessageBoxView : Window
 {

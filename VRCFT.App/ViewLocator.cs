@@ -1,8 +1,8 @@
-using System;
-using System.Diagnostics.CodeAnalysis;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using VRCFT.App.Utility;
+using System;
+using System.Diagnostics.CodeAnalysis;
+using VRCFT.Base;
 
 namespace VRCFT.App
 {

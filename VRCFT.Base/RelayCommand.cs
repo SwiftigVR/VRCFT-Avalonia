@@ -1,9 +1,6 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
-namespace VRCFT.App.Utility;
+namespace VRCFT.Base;
 
 public class RelayCommand : ICommand
 {

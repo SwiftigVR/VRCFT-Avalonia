@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace VRCFT.App.Utility;
+﻿namespace VRCFT.Extension;
 
 public static class Extensions
 {

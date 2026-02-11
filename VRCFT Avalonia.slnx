@@ -1,4 +1,6 @@
 <Solution>
   <Project Path="VRCFT.App/VRCFT.App.csproj" />
+  <Project Path="VRCFT.Base/VRCFT.Base.csproj" Id="9842b48d-2613-4dfb-80b7-c48635a132c2" />
   <Project Path="VRCFT.Debug/VRCFT.Debug.csproj" Id="6095ac3f-ca8a-4056-be10-ca6ffca05d15" />
+  <Project Path="VRCFT.Extension/VRCFT.Extension.csproj" Id="e7c3322d-38ed-4de3-b7b9-bac4242e2ac4" />
 </Solution>

@@ -1,7 +1,7 @@
 using Avalonia.Controls;
 using VRCFT.App.Service;
-using VRCFT.App.Utility;
 using VRCFT.App.View;
+using VRCFT.Base;
 
 namespace VRCFT.App.ViewModel;
 

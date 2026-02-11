@@ -1,6 +1,7 @@
 using Avalonia.Controls;
+using VRCFT.Base;
 
-namespace VRCFT.App.Utility.MessageBox;
+namespace VRCFT.Extension.MessageBox;
 
 public static class MessageBox
 {
@@ -13,13 +14,13 @@ public static class MessageBox
             Buttons = buttons,
             Icon = icon
         };
-        messageBoxViewModel.Initialize();
 
+        messageBoxViewModel.Initialize();
         return messageBoxViewModel.Result;
     }
 }
 
-public class MessageBoxViewModel : ViewModelBase
+internal class MessageBoxViewModel : ViewModelBase
 {
     public string Title { get; set; } = string.Empty;
     public string Text { get; set; } = string.Empty;
@@ -34,6 +35,7 @@ public class MessageBoxViewModel : ViewModelBase
     {
         View = new MessageBoxView();
         View.DataContext = this;
+        View.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
         var mainWindow = GetMainWindow();
         View.ShowDialog(mainWindow!);
@@ -60,7 +62,7 @@ public class MessageBoxViewModel : ViewModelBase
         Result = MessageBoxResult.Yes;
         View.Close();
     });
-    
+
     public RelayCommand ResultOk => field ??= new RelayCommand(() =>
     {
         Result = MessageBoxResult.Ok;

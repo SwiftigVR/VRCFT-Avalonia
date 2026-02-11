@@ -1,8 +1,8 @@
 using Avalonia.Controls;
 using Avalonia.Input;
 using System;
-using VRCFT.App.Utility;
 using VRCFT.App.ViewModel;
+using VRCFT.Extension;
 
 namespace VRCFT.App.ViewComponent;
 

@@ -4,21 +4,19 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		mc:Ignorable="d"
 
-		xmlns:vm="using:VRCFT.App.Utility.MessageBox"
+		xmlns:local="using:VRCFT.Extension.MessageBox"
 
-		x:Class="VRCFT.App.Utility.MessageBox.MessageBoxView"
-		x:DataType="vm:MessageBoxViewModel"
+		x:Class="VRCFT.Extension.MessageBox.MessageBoxView"
+		x:DataType="local:MessageBoxViewModel"
 
-		d:DesignWidth="250"
-		d:DesignHeight="150"
-		Width="NaN"
-		Height="NaN"
+		Width="300"
+		Height="200"
 
-		Icon="/Assets/VrcftTool.ico"
 		Title="{Binding Title}"
 
 		CanMinimize="False"
 		CanMaximize="False"
+		CanResize="False"
 
 		Padding="5,0,5,5"
 		Background="Transparent"

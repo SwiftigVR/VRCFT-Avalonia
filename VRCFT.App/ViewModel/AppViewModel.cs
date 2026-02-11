@@ -2,9 +2,10 @@
 using System;
 using System.Threading.Tasks;
 using VRCFT.App.Service;
-using VRCFT.App.Utility;
-using VRCFT.App.Utility.MessageBox;
 using VRCFT.App.View;
+using VRCFT.Base;
+using VRCFT.Extension;
+using VRCFT.Extension.MessageBox;
 
 namespace VRCFT.App.ViewModel;
 
@@ -26,7 +27,7 @@ public partial class AppViewModel : ViewModelBase
         View.Show();
     }
 
-    private void OnClosing(object? sender, WindowClosingEventArgs e)
+    private async void OnClosing(object? sender, WindowClosingEventArgs e)
     {
         var result = MessageBox.Show
         (

@@ -4,25 +4,26 @@ namespace VRCFT.App.Utility.MessageBox;
 
 public static class MessageBox
 {
-    public static MessageBoxResult Show(string title, string text, MessageBoxIcon icon = MessageBoxIcon.None)
+    public static MessageBoxResult Show(string title, string text, MessageBoxButtons buttons, MessageBoxIcon icon = MessageBoxIcon.None)
     {
         var messageBoxViewModel = new MessageBoxViewModel()
         {
             Title = title,
             Text = text,
+            Buttons = buttons,
             Icon = icon
         };
         messageBoxViewModel.Initialize();
 
         return messageBoxViewModel.Result;
     }
-
 }
 
 public class MessageBoxViewModel : ViewModelBase
 {
     public string Title { get; set; } = string.Empty;
     public string Text { get; set; } = string.Empty;
+    public MessageBoxButtons Buttons { get; set; }
     public MessageBoxIcon Icon { get; set; }
 
     #region Window Initialize
@@ -42,9 +43,9 @@ public class MessageBoxViewModel : ViewModelBase
 
     public MessageBoxResult Result { get; private set; }
 
-    public RelayCommand ResultYes => field ??= new RelayCommand(() =>
+    public RelayCommand ResultNo => field ??= new RelayCommand(() =>
     {
-        Result = MessageBoxResult.Yes;
+        Result = MessageBoxResult.No;
         View.Close();
     });
 
@@ -54,9 +55,15 @@ public class MessageBoxViewModel : ViewModelBase
         View.Close();
     });
 
-    public RelayCommand ResultNo => field ??= new RelayCommand(() =>
+    public RelayCommand ResultYes => field ??= new RelayCommand(() =>
     {
-        Result = MessageBoxResult.No;
+        Result = MessageBoxResult.Yes;
+        View.Close();
+    });
+    
+    public RelayCommand ResultOk => field ??= new RelayCommand(() =>
+    {
+        Result = MessageBoxResult.Ok;
         View.Close();
     });
 }
@@ -81,4 +88,5 @@ public enum MessageBoxResult
     No,
     Cancel,
     Yes,
+    Ok,
 }

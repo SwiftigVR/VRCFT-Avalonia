@@ -27,22 +27,8 @@ public partial class AppViewModel : ViewModelBase
         View.Show();
     }
 
-    private async void OnClosing(object? sender, WindowClosingEventArgs e)
+    private void OnClosing(object? sender, WindowClosingEventArgs e)
     {
-        var result = MessageBox.Show
-        (
-            "Test Message",
-            $"This is a test message!{Environment.NewLine}Ignore it...",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question
-        );
-
-        if (result != MessageBoxResult.Yes)
-        {
-            e.Cancel = true;
-            return;
-        }
-
         SaveWindowState();
     }
 
@@ -52,6 +38,22 @@ public partial class AppViewModel : ViewModelBase
     #endregion
 
     #region UI
+
+    public RelayCommand Message => field ??= new RelayCommand(async () =>
+    {
+        var result = MessageBox.Show
+        (
+            "Test Message",
+            $"This is a test message!{Environment.NewLine}Ignore it...",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question
+        );
+
+        if (result == MessageBoxResult.Yes)
+        {
+            
+        }
+    });
 
     public RelayCommand OpenSettings => field ??= new RelayCommand(() =>
     {

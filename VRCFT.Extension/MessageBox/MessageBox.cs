@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Media.Imaging;
 using VRCFT.Base;
 
 namespace VRCFT.Extension.MessageBox;
@@ -6,6 +7,12 @@ namespace VRCFT.Extension.MessageBox;
 public static class MessageBox
 {
     public static MessageBoxResult Show(string title, string text, MessageBoxButtons buttons, MessageBoxIcon icon = MessageBoxIcon.None)
+    {
+        var result = ShowAsync(title, text, buttons, icon).GetAwaiter().GetResult();
+        return result;
+    }
+
+    public static async Task<MessageBoxResult> ShowAsync(string title, string text, MessageBoxButtons buttons, MessageBoxIcon icon = MessageBoxIcon.None)
     {
         var messageBoxViewModel = new MessageBoxViewModel()
         {
@@ -16,6 +23,7 @@ public static class MessageBox
         };
 
         messageBoxViewModel.Initialize();
+
         return messageBoxViewModel.Result;
     }
 }
@@ -31,17 +39,22 @@ internal class MessageBoxViewModel : ViewModelBase
 
     private Window View { get; set; } = null!;
 
-    public void Initialize()
+    public async void Initialize()
     {
         View = new MessageBoxView();
         View.DataContext = this;
         View.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
         var mainWindow = GetMainWindow();
-        View.ShowDialog(mainWindow!);
+        await View.ShowDialog(mainWindow!);
     }
 
     #endregion
+
+    public Bitmap? IconSource => Icon switch
+    {
+        _ => null
+    };
 
     public MessageBoxResult Result { get; private set; }
 

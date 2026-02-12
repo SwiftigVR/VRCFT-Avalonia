@@ -109,6 +109,10 @@
 						Orientation="Horizontal"
 						Spacing="5">
 
+				<Button Command="{Binding Message}">
+					MessageBox
+				</Button>
+
 				<Button Command="{Binding OpenSettings}">
 					Settings
 				</Button>

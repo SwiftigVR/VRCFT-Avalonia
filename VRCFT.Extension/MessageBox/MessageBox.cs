@@ -6,9 +6,6 @@ namespace VRCFT.Extension.MessageBox;
 
 public sealed class MessageBox
 {
-    public static MessageBoxResult Show(Window owner, string title, string text, MessageBoxButtons buttons, MessageBoxIcon icon = MessageBoxIcon.None)
-        => ShowAsync(owner, title, text, buttons, icon).GetAwaiter().GetResult();
-
     public static async Task<MessageBoxResult> ShowAsync(Window owner, string title, string text, MessageBoxButtons buttons, MessageBoxIcon icon = MessageBoxIcon.None)
     {
         var dialog = new MessageBoxViewModel()

@@ -38,22 +38,6 @@ public partial class AppViewModel : ViewModelBase
 
     #region UI
 
-    public RelayCommand Message => field ??= new RelayCommand(() =>
-    {
-        var result = MessageBox.Show
-        (
-            View,
-            "Test Message",
-            $"This is a test message!{Environment.NewLine}Ignore it...",
-            MessageBoxButtons.YesNo
-        );
-
-        if (result != MessageBoxResult.No)
-        {
-            
-        }
-    });
-
     public RelayCommand MessageAsync => field ??= new RelayCommand(async () =>
     {
         var result = await MessageBox.ShowAsync
@@ -67,7 +51,7 @@ public partial class AppViewModel : ViewModelBase
 
         if (result != MessageBoxResult.No)
         {
-            
+
         }
     });
 

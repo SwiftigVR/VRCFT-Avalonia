@@ -9,8 +9,9 @@
 		x:Class="VRCFT.Extension.MessageBox.MessageBoxView"
 		x:DataType="local:MessageBoxViewModel"
 
-		SizeToContent="WidthAndHeight"
-		MaxWidth="400"
+		SizeToContent="Manual"
+		Height="250"
+		Width="400"
 
 		Title="{Binding Title}"
 

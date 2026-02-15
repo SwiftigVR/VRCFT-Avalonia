@@ -1,6 +1,5 @@
 ﻿using Avalonia.Controls;
 using System;
-using System.Threading.Tasks;
 using VRCFT.App.Service;
 using VRCFT.App.View;
 using VRCFT.Base;
@@ -39,17 +38,34 @@ public partial class AppViewModel : ViewModelBase
 
     #region UI
 
-    public RelayCommand Message => field ??= new RelayCommand(async () =>
+    public RelayCommand Message => field ??= new RelayCommand(() =>
     {
         var result = MessageBox.Show
         (
+            View,
             "Test Message",
+            $"This is a test message!{Environment.NewLine}Ignore it...",
+            MessageBoxButtons.YesNo
+        );
+
+        if (result != MessageBoxResult.No)
+        {
+            
+        }
+    });
+
+    public RelayCommand MessageAsync => field ??= new RelayCommand(async () =>
+    {
+        var result = await MessageBox.ShowAsync
+        (
+            View,
+            "Test Message Async",
             $"This is a test message!{Environment.NewLine}Ignore it...",
             MessageBoxButtons.YesNo,
             MessageBoxIcon.Question
         );
 
-        if (result == MessageBoxResult.Yes)
+        if (result != MessageBoxResult.No)
         {
             
         }
@@ -57,8 +73,7 @@ public partial class AppViewModel : ViewModelBase
 
     public RelayCommand OpenSettings => field ??= new RelayCommand(() =>
     {
-        var settingsViewModel = new SettingsViewModel();
-        settingsViewModel.Initialize();
+        new SettingsViewModel().Initialize();
     });
 
     public RelayCommand OpenAppData => field ??= new RelayCommand(() =>

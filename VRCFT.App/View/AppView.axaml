@@ -113,6 +113,10 @@
 					MessageBox
 				</Button>
 
+				<Button Command="{Binding MessageAsync}">
+					MessageBox (Async)
+				</Button>
+
 				<Button Command="{Binding OpenSettings}">
 					Settings
 				</Button>

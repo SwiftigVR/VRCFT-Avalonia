@@ -43,10 +43,8 @@ public partial class AppViewModel : ViewModelBase
         var result = await MessageBox.ShowAsync
         (
             View,
-            "Test Message Async",
-            $"This is a test message!{Environment.NewLine}Ignore it...",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Question
+            "MessageBox",
+            $"This is a test message!{Environment.NewLine}Ignore it..."
         );
 
         if (result != MessageBoxResult.No)

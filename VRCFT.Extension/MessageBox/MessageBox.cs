@@ -22,19 +22,17 @@ public sealed class MessageBox
             Icon = icon
         };
 
-        dialog.View = new MessageBoxView()
-        {
-            DataContext = dialog,
-            WindowStartupLocation = WindowStartupLocation.CenterOwner,
-        };
-
         return await dialog.View.ShowDialog<MessageBoxResult>(owner);
     }
 }
 
 internal class MessageBoxViewModel : ViewModelBase
 {
-    public Window View { get; set; } = null!;
+    public Window View => new MessageBoxView()
+    {
+        DataContext = this,
+        WindowStartupLocation = WindowStartupLocation.CenterOwner
+    };
 
     public string Title { get; set; } = string.Empty;
     public string Text { get; set; } = string.Empty;

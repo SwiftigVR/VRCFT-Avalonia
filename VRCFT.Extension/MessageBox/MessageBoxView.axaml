@@ -45,8 +45,8 @@
 					   Margin="0,0,15,0"
 					   Width="60"
 					   Height="60"
-					   Source="{Binding IconSource}"
-					   IsVisible="{Binding IconSource, Converter={x:Static ObjectConverters.IsNotNull}}" />
+					   Source="{Binding Icon}"
+					   IsVisible="{Binding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
 
 				<!-- Label with text-wrapping -->
 				<TextBlock Grid.Column="1"

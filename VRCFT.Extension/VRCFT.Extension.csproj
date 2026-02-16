@@ -7,6 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="MessageBox\Assets\Check.png" />
+    <None Remove="MessageBox\Assets\Error.png" />
+    <None Remove="MessageBox\Assets\Question.png" />
+    <None Remove="MessageBox\Assets\Warning.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="MessageBox\Assets\Check.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Include="MessageBox\Assets\Error.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Include="MessageBox\Assets\Question.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AvaloniaResource>
+    <AvaloniaResource Include="MessageBox\Assets\Warning.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </AvaloniaResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.3.11" />
   </ItemGroup>
 

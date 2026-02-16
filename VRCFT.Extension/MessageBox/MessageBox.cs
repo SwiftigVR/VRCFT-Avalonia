@@ -1,6 +1,5 @@
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
-using VRCFT.Base;
 
 namespace VRCFT.Extension.MessageBox;
 
@@ -19,7 +18,7 @@ public sealed class MessageBox
             Title = title,
             Text = text,
             Buttons = buttons,
-            Icon = icon
+            Icon = GetIcon(icon)
         };
 
         dialog.View = new MessageBoxView()
@@ -30,52 +29,18 @@ public sealed class MessageBox
 
         return await dialog.View.ShowDialog<MessageBoxResult>(owner);
     }
-}
 
-internal class MessageBoxViewModel : ViewModelBase
-{
-    public Window View { get; set; } = null!;
-
-    public string Title { get; set; } = string.Empty;
-    public string Text { get; set; } = string.Empty;
-    public MessageBoxButtons Buttons { get; set; }
-
-    public MessageBoxIcon Icon { get; set; }
-    public Bitmap? IconSource => Icon switch
+    private static Bitmap? GetIcon(MessageBoxIcon icon)
     {
-        MessageBoxIcon.Question => GetIcon("Question.png"),
-        MessageBoxIcon.Warning => GetIcon("Warning.png"),
-        MessageBoxIcon.Error => GetIcon("Error.png"),
-        _ => null
-    };
+        string? fileName = icon switch
+        {
+            MessageBoxIcon.Check => "Check.png",
+            MessageBoxIcon.Question => "Question.png",
+            MessageBoxIcon.Warning => "Warning.png",
+            MessageBoxIcon.Error => "Error.png",
+            _ => null
+        };
 
-    private Bitmap GetIcon(string fileName) => ImageHelper.Load($"avares://VRCFT.Extension/MessageBox/Assets/{fileName}");
-
-    public RelayCommand ResultNo => field ??= new RelayCommand(() => View.Close(MessageBoxResult.No));
-    public RelayCommand ResultCancel => field ??= new RelayCommand(() => View.Close(MessageBoxResult.Cancel));
-    public RelayCommand ResultYes => field ??= new RelayCommand(() => View.Close(MessageBoxResult.Yes));
-    public RelayCommand ResultOk => field ??= new RelayCommand(() => View.Close(MessageBoxResult.Ok));
-}
-
-public enum MessageBoxButtons
-{
-    OK,
-    YesNo,
-    YesCancel,
-}
-
-public enum MessageBoxIcon
-{
-    None,
-    Question,
-    Warning,
-    Error,
-}
-
-public enum MessageBoxResult
-{
-    No,
-    Cancel,
-    Yes,
-    Ok,
+        return ImageHelper.Load($"avares://VRCFT.Extension/MessageBox/Assets/{fileName}");
+    }
 }

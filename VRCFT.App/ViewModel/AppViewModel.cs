@@ -38,19 +38,9 @@ public partial class AppViewModel : ViewModelBase
 
     #region UI
 
-    public RelayCommand MessageAsync => field ??= new RelayCommand(async () =>
+    public RelayCommand MessageAsync => field ??= new RelayCommand(() =>
     {
-        var result = await MessageBox.ShowAsync
-        (
-            View,
-            "MessageBox",
-            $"This is a test message!{Environment.NewLine}Ignore it..."
-        );
-
-        if (result != MessageBoxResult.No)
-        {
-
-        }
+        _ = MessageBox.ShowAsync(View, "Test", "Yep!");
     });
 
     public RelayCommand OpenSettings => field ??= new RelayCommand(() =>

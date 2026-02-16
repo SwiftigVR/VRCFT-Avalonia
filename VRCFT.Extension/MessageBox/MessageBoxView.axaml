@@ -9,9 +9,7 @@
 		x:Class="VRCFT.Extension.MessageBox.MessageBoxView"
 		x:DataType="local:MessageBoxViewModel"
 
-		SizeToContent="Manual"
-		Height="250"
-		Width="400"
+		SizeToContent="WidthAndHeight"
 
 		Title="{Binding Title}"
 
@@ -43,11 +41,12 @@
 					<ColumnDefinition Width="*" />
 				</Grid.ColumnDefinitions>
 
-				<Rectangle Grid.Column="0"
-						   Margin="0,0,15,0"
-						   Width="60"
-						   Height="60"
-						   Fill="#666" />
+				<Image Grid.Column="0"
+					   Margin="0,0,15,0"
+					   Width="60"
+					   Height="60"
+					   Source="{Binding IconSource}"
+					   IsVisible="{Binding IconSource, Converter={x:Static ObjectConverters.IsNotNull}}" />
 
 				<!-- Label with text-wrapping -->
 				<TextBlock Grid.Column="1"

@@ -3,16 +3,14 @@
 public static class Extensions
 {
     public static float LimitDecimal(this float value, int afterDecimal = 4)
-    {
-        return (float)Math.Round((double)value, afterDecimal, MidpointRounding.AwayFromZero);
-    }
-
-    public static float Invert(this float value) => -value;
+        => (float)Math.Round((double)value, afterDecimal, MidpointRounding.AwayFromZero);
 
     public static double LimitDecimal(this double value, int afterDecimal = 4)
-    {
-        return Math.Round(value, afterDecimal, MidpointRounding.AwayFromZero);
-    }
+        => Math.Round(value, afterDecimal, MidpointRounding.AwayFromZero);
 
-    public static double Invert(this double value) => -value;
+    public static float Invert(this float value)
+        => -value;
+
+    public static double Invert(this double value)
+        => -value;
 }

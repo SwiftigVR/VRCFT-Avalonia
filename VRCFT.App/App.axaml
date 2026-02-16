@@ -13,8 +13,12 @@
 		<!--<FluentTheme />-->
 		<semi:SemiTheme Locale="en-US" />
 		<semi:AvaloniaEditSemiTheme />
+
+		<Style Selector="Button">
+			<Setter Property="IsEnabled" Value="{Binding Command, RelativeSource={RelativeSource Self}, Converter={x:Static ObjectConverters.IsNotNull}}" />
+		</Style>
 	</Application.Styles>
-	
+
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
@@ -22,6 +26,6 @@
 				<!-- <ResourceInclude Source="/Assets/Themes/UiOverwrite.axaml" /> -->
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
-	</Application.Resources>	
+	</Application.Resources>
 
 </Application>

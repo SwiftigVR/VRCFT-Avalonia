@@ -109,6 +109,10 @@
 						Orientation="Horizontal"
 						Spacing="5">
 
+				<Button>
+					Unused
+				</Button>
+
 				<Button Command="{Binding MessageAsync}">
 					MessageBox (Async)
 				</Button>

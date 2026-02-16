@@ -1,7 +1,5 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
-using Avalonia.Platform;
 using VRCFT.Base;
 
 namespace VRCFT.Extension.MessageBox;
@@ -51,10 +49,8 @@ internal class MessageBoxViewModel : ViewModelBase
         _ => null
     };
 
-    private Bitmap GetIcon(string fileName)
-        => ImageHelper.Load($"avares://MessageBox.Avalonia.Example/Assets/{fileName}");
+    private Bitmap GetIcon(string fileName) => ImageHelper.Load($"avares://VRCFT.Extension/MessageBox/Assets/{fileName}");
 
-    public MessageBoxResult Result { get; private set; }
     public RelayCommand ResultNo => field ??= new RelayCommand(() => View.Close(MessageBoxResult.No));
     public RelayCommand ResultCancel => field ??= new RelayCommand(() => View.Close(MessageBoxResult.Cancel));
     public RelayCommand ResultYes => field ??= new RelayCommand(() => View.Close(MessageBoxResult.Yes));

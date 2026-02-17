@@ -16,7 +16,7 @@
 	<UserControl.Resources>
 		<converter:MinDoubleConverter x:Key="MinDoubleConverter" />
 		<converter:EyeXToCanvasConverter x:Key="EyeXToCanvasConverter" />
-        <converter:EyeYToCanvasConverter x:Key="EyeYToCanvasConverter" />
+		<converter:EyeYToCanvasConverter x:Key="EyeYToCanvasConverter" />
 	</UserControl.Resources>
 
 	<Design.DataContext>
@@ -49,37 +49,37 @@
 				</Border.Height>
 
 				<Canvas x:Name="RightEyeCanvas">
-                    <Thumb x:Name="RightEyeThumb"
-                           Width="16"
-                           Height="16"
-                           Margin="-8,-8,0,0"
-                           DragDelta="RightEyeDrag"
+					<Thumb x:Name="RightEyeThumb"
+						   Width="16"
+						   Height="16"
+						   Margin="-8,-8,0,0"
+						   DragDelta="RightEyeDrag"
 						   DoubleTapped="RightEyeReset">
 
-                        <Canvas.Left>
-                            <MultiBinding Mode="TwoWay" Converter="{StaticResource EyeXToCanvasConverter}">
-                                <Binding Path="EyeRightX" />
-                                <Binding RelativeSource="{RelativeSource AncestorType=Canvas}" Path="Bounds.Width" />
-                            </MultiBinding>
-                        </Canvas.Left>
+						<Canvas.Left>
+							<MultiBinding Mode="TwoWay" Converter="{StaticResource EyeXToCanvasConverter}">
+								<Binding Path="EyeRightX" />
+								<Binding RelativeSource="{RelativeSource AncestorType=Canvas}" Path="Bounds.Width" />
+							</MultiBinding>
+						</Canvas.Left>
 
-                        <Canvas.Top>
-                            <MultiBinding Mode="TwoWay" Converter="{StaticResource EyeYToCanvasConverter}">
-                                <Binding Path="EyeY" />
-                                <Binding RelativeSource="{RelativeSource AncestorType=Canvas}" Path="Bounds.Height" />
-                            </MultiBinding>
-                        </Canvas.Top>
+						<Canvas.Top>
+							<MultiBinding Mode="TwoWay" Converter="{StaticResource EyeYToCanvasConverter}">
+								<Binding Path="EyeY" />
+								<Binding RelativeSource="{RelativeSource AncestorType=Canvas}" Path="Bounds.Height" />
+							</MultiBinding>
+						</Canvas.Top>
 
-                        <Thumb.Template>
-                            <ControlTemplate TargetType="Thumb">
-                                <Border Background="White"
-										CornerRadius="8" 
+						<Thumb.Template>
+							<ControlTemplate TargetType="Thumb">
+								<Border Background="White"
+										CornerRadius="8"
 										BorderBrush="{DynamicResource UiPrimary}"
 										BorderThickness="2" />
-                            </ControlTemplate>
-                        </Thumb.Template>
-                    </Thumb>
-                </Canvas>
+							</ControlTemplate>
+						</Thumb.Template>
+					</Thumb>
+				</Canvas>
 			</Border>
 		</Grid>
 
@@ -134,8 +134,9 @@
 
 				<Slider Orientation="Vertical"
 						Margin="0,5"
-						Minimum="-1"
-						Maximum="1"/>
+						Minimum="0"
+						Maximum="1"
+						Value="{Binding BrowDownRight, Mode=TwoWay}" />
 
 				<Slider Orientation="Vertical"
 						Margin="0,5"

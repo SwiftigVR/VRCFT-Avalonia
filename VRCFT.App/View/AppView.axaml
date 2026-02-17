@@ -113,8 +113,8 @@
 					Unused
 				</Button>
 
-				<Button Command="{Binding MessageAsync}">
-					MessageBox (Async)
+				<Button Command="{Binding RandomMessage}">
+					Random MessageBox
 				</Button>
 
 				<Button Command="{Binding OpenSettings}">

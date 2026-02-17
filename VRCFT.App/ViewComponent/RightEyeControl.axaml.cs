@@ -35,8 +35,8 @@ public partial class RightEyeControl : UserControl
         var clampedX = Math.Clamp(normalizedX, -100d, 100d);
         var clampedY = Math.Clamp(normalizedY, -100d, 100d);
 
-        vm.EyeRightX = clampedX.LimitDecimal(4);
-        vm.EyeY = clampedY.LimitDecimal(4);
+        vm.EyeRightX = clampedX;
+        vm.EyeY = clampedY;
     }
 
     private void RightEyeReset(object? sender, TappedEventArgs e)

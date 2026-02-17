@@ -38,14 +38,17 @@ public partial class AppViewModel : ViewModelBase
 
     #region UI
 
-    public RelayCommand MessageAsync => field ??= new RelayCommand(() =>
+    public RelayCommand RandomMessage => field ??= new RelayCommand(() =>
     {
+        var rng = new Random();
+
         _ = MessageBox.ShowAsync
         (
             View,
             "Test",
             Globals.LoremIpsum.FormatNewLines(),
-            MessageBoxButtons.YesNo
+            (MessageBoxButtons)rng.Next(0, 3),
+            (MessageBoxIcon)rng.Next(0, 5)
         );
     });
 
@@ -100,11 +103,11 @@ public partial class AppViewModel : ViewModelBase
             {
                 field = value;
 
-                if (ConfigManager.Config.OscSyncEyeLook)
+                if (ConfigManager.Config.OscSyncEyeLook && EyeRightX != value)
                     EyeRightX = value;
 
                 float converted = (float)(Math.Clamp(value, -100d, 100d) / 100d);
-                Osc.SendMessage(converted.LimitDecimal());
+                Osc.SendMessage(converted);
 
                 OnPropertyChanged();
             }
@@ -120,11 +123,11 @@ public partial class AppViewModel : ViewModelBase
             {
                 field = value;
 
-                if (ConfigManager.Config.OscSyncEyeLook)
+                if (ConfigManager.Config.OscSyncEyeLook && EyeLeftX != value)
                     EyeLeftX = value;
 
                 float converted = (float)(Math.Clamp(value, -100d, 100d) / 100d);
-                Osc.SendMessage(converted.LimitDecimal());
+                Osc.SendMessage(converted);
 
                 OnPropertyChanged();
             }
@@ -141,7 +144,7 @@ public partial class AppViewModel : ViewModelBase
                 field = value;
 
                 float converted = (float)(Math.Clamp(value, -100d, 100d) / 100d);
-                Osc.SendMessage(converted.LimitDecimal());
+                Osc.SendMessage(converted);
 
                 OnPropertyChanged();
             }
@@ -161,7 +164,7 @@ public partial class AppViewModel : ViewModelBase
             {
                 field = value;
 
-                Osc.SendMessage(value.LimitDecimal());
+                Osc.SendMessage(value);
                 OnPropertyChanged();
             }
         }
@@ -176,7 +179,7 @@ public partial class AppViewModel : ViewModelBase
             {
                 field = value;
 
-                Osc.SendMessage(value.LimitDecimal());
+                Osc.SendMessage(value);
                 OnPropertyChanged();
             }
         }
@@ -197,11 +200,11 @@ public partial class AppViewModel : ViewModelBase
             {
                 field = value;
 
-                Osc.SendMessage(value.LimitDecimal());
+                Osc.SendMessage(value);
                 OnPropertyChanged();
             }
         }
-    }
+    } = 1f;
 
     public float BrowDownLeft
     {
@@ -212,11 +215,11 @@ public partial class AppViewModel : ViewModelBase
             {
                 field = value;
 
-                Osc.SendMessage(value.LimitDecimal());
+                Osc.SendMessage(value);
                 OnPropertyChanged();
             }
         }
-    }
+    } = 1f;
 
     public float BrowOuterUp
     {
@@ -227,7 +230,7 @@ public partial class AppViewModel : ViewModelBase
             {
                 field = value;
 
-                Osc.SendMessage(value.LimitDecimal());
+                Osc.SendMessage(value);
                 OnPropertyChanged();
             }
         }
@@ -242,7 +245,7 @@ public partial class AppViewModel : ViewModelBase
             {
                 field = value;
 
-                Osc.SendMessage(value.LimitDecimal());
+                Osc.SendMessage(value);
                 OnPropertyChanged();
             }
         }

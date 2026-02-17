@@ -35,8 +35,8 @@ public partial class LeftEyeControl : UserControl
         var clampedX = Math.Clamp(normalizedX, -100d, 100d);
         var clampedY = Math.Clamp(normalizedY, -100d, 100d);
 
-        vm.EyeLeftX = clampedX.LimitDecimal(4);
-        vm.EyeY = clampedY.LimitDecimal(4);
+        vm.EyeLeftX = clampedX;
+        vm.EyeY = clampedY;
     }
 
     private void LeftEyeReset(object? sender, TappedEventArgs e)

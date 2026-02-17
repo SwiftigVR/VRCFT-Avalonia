@@ -1,6 +1,7 @@
 ﻿using LucHeart.CoreOSC;
 using System.Net;
 using System.Runtime.CompilerServices;
+using VRCFT.Extension;
 
 namespace VRCFT.App.Service;
 
@@ -22,7 +23,7 @@ public class OscManager
                 var endPoint = new IPEndPoint(IPAddress.Loopback, ConfigManager.Config.OscSendingPort);
                 field = new OscSender(endPoint);
 
-                _usedSenderPort = endPoint.Port;
+                _usedSenderPort = ConfigManager.Config.OscSendingPort;
             }
 
             return field;
@@ -35,20 +36,7 @@ public class OscManager
     /// Sends an OSC message with the parameter name derived from the caller member name.
     /// </summary>
     public void SendMessage(object? value, [CallerMemberName] string? parameterName = null)
-    {
-        if (string.IsNullOrEmpty(parameterName) || value == null)
-            return;
-
-        string fullParameter = _BasePrefix;
-
-        if (!string.IsNullOrEmpty(ConfigManager.Config.OscParamterPrefix))
-            fullParameter += ConfigManager.Config.OscParamterPrefix + "/";
-
-        fullParameter += "v2/" + parameterName;
-
-        var message = new OscMessage(fullParameter, [value]);
-        Sender.SendAsync(message.GetBytes());
-    }
+        => SendMessage(parameterName!, value);
 
     /// <summary>
     /// Sends an OSC message with the specified parameter name.
@@ -58,14 +46,21 @@ public class OscManager
         if (string.IsNullOrEmpty(parameterName) || value == null)
             return;
 
-        string fullParameter = _BasePrefix;
+        string fullParameterPath = _BasePrefix;
 
         if (!string.IsNullOrEmpty(ConfigManager.Config.OscParamterPrefix))
-            fullParameter += ConfigManager.Config.OscParamterPrefix + "/";
+            fullParameterPath += ConfigManager.Config.OscParamterPrefix + "/";
 
-        fullParameter += "v2/" + parameterName;
+        fullParameterPath += "v2/" + parameterName;
 
-        var message = new OscMessage(fullParameter, [value]);
+        value = value switch
+        {
+            float floatValue => floatValue.LimitDecimal(afterDecimal: 4),
+            double doubleValue => doubleValue.LimitDecimal(afterDecimal: 4),
+            _ => value
+        };
+
+        var message = new OscMessage(fullParameterPath, [value]);
         Sender.SendAsync(message.GetBytes());
     }
 
@@ -87,7 +82,7 @@ public class OscManager
                 var endPoint = new IPEndPoint(IPAddress.Loopback, ConfigManager.Config.OscListeningPort);
                 field = new OscListener(endPoint);
 
-                _usedListeningPort = endPoint.Port;
+                _usedListeningPort = ConfigManager.Config.OscListeningPort;
             }
 
             return field;

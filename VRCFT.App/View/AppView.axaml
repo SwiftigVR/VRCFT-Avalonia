@@ -16,7 +16,6 @@
 		Width="1100"
 		Height="700"
 
-
 		Icon="/Assets/VrcftTool.ico"
 		Title="AppView"
 
@@ -54,113 +53,12 @@
 
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="30" />
+			<RowDefinition Height="31" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
-		<Grid Grid.Row="0"
-			  ColumnSpacing="5"
-			  Margin="8,0,0,0">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="Auto" />
-			</Grid.ColumnDefinitions>
+		<component:WindowChrome Grid.Row="0" />
 
-			<StackPanel Grid.Column="0"
-						VerticalAlignment="Center"
-						Orientation="Horizontal"
-						Spacing="5">
-
-				<Image Height="18"
-					   VerticalAlignment="Center"
-					   Source="/Assets/VrcftTool.ico" />
-
-				<Label Margin="0,0,5,0" 
-					   VerticalAlignment="Center"
-					   FontSize="13">
-					AppView
-				</Label>
-
-				<Button Classes="Tertiary"
-						Padding="0"
-						MinHeight="20"
-						Height="20"
-						MinWidth="20"
-						Width="20"
-						Command="{Binding ToggleAlwaysOnTop}">
-
-					<Label Foreground="{DynamicResource UiForeground}"
-						   FontSize="11"
-						   FontWeight="Bold"
-						   Content="📌" />
-
-				</Button>
-
-				<Button Classes="Tertiary"
-						Padding="0"
-						MinHeight="20"
-						Height="20"
-						MinWidth="20"
-						Width="20"
-						Command="{Binding OpenSettings}">
-
-					<Label Foreground="{DynamicResource UiForeground}"
-						   FontSize="11"
-						   FontWeight="Bold"
-						   Content="&#9881;" />
-
-				</Button>
-
-				<Button Classes="Tertiary"
-						Padding="0"
-						MinHeight="20"
-						Height="20"
-						MinWidth="20"
-						Width="20">
-
-					<Label Foreground="{DynamicResource UiForeground}"
-						   FontSize="11"
-						   FontWeight="Bold"
-						   Content="&#128448;" />
-
-				</Button>
-
-			</StackPanel>
-
-			<StackPanel Grid.Column="2"
-						VerticalAlignment="Center"
-						Orientation="Horizontal">
-
-				<Button Padding="0"
-						MinHeight="30"
-						Height="30"
-						MinWidth="30"
-						Width="30">
-					_
-				</Button>
-
-				<Button Padding="0"
-						MinHeight="30"
-						Height="30"
-						MinWidth="30"
-						Width="30">
-					O
-				</Button>
-
-				<Button Padding="0"
-						MinHeight="30"
-						Height="30"
-						MinWidth="30"
-						Width="30">
-					X
-				</Button>
-
-			</StackPanel>
-
-		</Grid>
-
-		<!-- UI -->
 		<Grid Grid.Row="1"
 			  ColumnSpacing="5"
 			  RowSpacing="5"

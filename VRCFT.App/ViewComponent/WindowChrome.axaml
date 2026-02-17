@@ -1,0 +1,114 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d"
+
+			 xmlns:vm="using:VRCFT.App.ViewModel"
+
+			 x:Class="VRCFT.App.ViewComponent.WindowChrome"
+			 x:DataType="vm:AppViewModel"
+
+			 d:DesignWidth="350"
+			 d:DesignHeight="31">
+
+	<Grid Grid.Row="0"
+		  ColumnSpacing="5"
+		  Margin="8,1,0,0">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="Auto" />
+		</Grid.ColumnDefinitions>
+
+		<!-- Icon/Window Title & Utility Buttons -->
+		<StackPanel Grid.Column="0"
+					VerticalAlignment="Center"
+					Orientation="Horizontal"
+					Spacing="5">
+
+			<Image Height="18"
+				   VerticalAlignment="Center"
+				   Source="/Assets/VrcftTool.ico" />
+
+			<Label Margin="0,0,5,0"
+				   VerticalAlignment="Center"
+				   FontSize="13">
+				AppView
+			</Label>
+
+			<Button Classes="Tertiary"
+					Command="{Binding ToggleAlwaysOnTop}">
+				<Label Foreground="{DynamicResource UiForeground}"
+					   FontSize="11"
+					   Content="📌" />
+			</Button>
+
+			<Button Classes="Tertiary"
+					Command="{Binding OpenSettings}">
+				<Label Foreground="{DynamicResource UiForeground}"
+					   FontSize="11"
+					   Content="&#9881;" />
+			</Button>
+
+			<Button Classes="Tertiary"
+					Command="{Binding OpenAppData}">
+				<Label Foreground="{DynamicResource UiForeground}"
+					   FontSize="11"
+					   Content="&#128448;" />
+			</Button>
+
+			<StackPanel.Styles>
+				<Style Selector="Button">
+					<Setter Property="Padding" Value="0" />
+					<Setter Property="Margin" Value="0" />
+					<Setter Property="MinHeight" Value="20" />
+					<Setter Property="Height" Value="20" />
+					<Setter Property="MinWidth" Value="20" />
+					<Setter Property="Width" Value="20" />
+				</Style>
+			</StackPanel.Styles>
+		</StackPanel>
+
+		<StackPanel Grid.Column="2"
+					VerticalAlignment="Center"
+					Orientation="Horizontal">
+
+			<Button Command="{Binding Minimize}">
+				&#8211;
+			</Button>
+
+			<Button Command="{Binding Maximize}">
+				&#9633;
+			</Button>
+
+			<Button Command="{Binding Close}">
+				<Button.Styles>
+					<Style Selector="Button:pointerover">
+						<Setter Property="Foreground" Value="White" />
+						<Setter Property="Background" Value="#E81123" />
+					</Style>
+				</Button.Styles>
+				&#10005;
+			</Button>
+
+			<StackPanel.Styles>
+				<Style Selector="Button">
+					<Setter Property="Foreground" Value="{DynamicResource UiForeground}" />
+					<Setter Property="Background" Value="Transparent" />
+					<Setter Property="Padding" Value="0" />
+					<Setter Property="MinHeight" Value="30" />
+					<Setter Property="Height" Value="30" />
+					<Setter Property="MinWidth" Value="30" />
+					<Setter Property="Width" Value="35" />
+					<Setter Property="BorderThickness" Value="0" />
+					<Setter Property="CornerRadius" Value="0" />
+					<Setter Property="VerticalContentAlignment" Value="Center" />
+					<Setter Property="HorizontalContentAlignment" Value="Center" />
+				</Style>
+			</StackPanel.Styles>
+		</StackPanel>
+
+	</Grid>
+
+</UserControl>

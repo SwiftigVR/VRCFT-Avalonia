@@ -83,13 +83,11 @@ public partial class AppViewModel : ViewModelBase
 
     public RelayCommand Minimize => field ??= new RelayCommand(() =>
     {
-        // minimizes the Window
         View.WindowState = WindowState.Minimized;
     });
 
     public RelayCommand Maximize => field ??= new RelayCommand(() =>
     {
-        // toggles between maximized and normal state
         if (View.WindowState == WindowState.Maximized)
             View.WindowState = WindowState.Normal;
         else

@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using System;
 using VRCFT.App.Service;
 using VRCFT.App.View;
@@ -18,6 +19,7 @@ public partial class AppViewModel : ViewModelBase
     {
         View = new AppView();
         View.DataContext = this;
+        View.Topmost = ConfigManager.Config.AlwaysOnTop;
         View.Closing += OnClosing;
 
         LoadWindowState();
@@ -37,6 +39,19 @@ public partial class AppViewModel : ViewModelBase
     #endregion
 
     #region UI
+
+    public bool AlwaysOnTop { get; set; } = ConfigManager.Config.AlwaysOnTop;
+
+    public RelayCommand ToggleAlwaysOnTop => field ??= new RelayCommand(() =>
+    {
+        bool newValue = !ConfigManager.Config.AlwaysOnTop;
+
+        ConfigManager.Config.AlwaysOnTop = newValue;
+        View.Topmost = newValue;
+
+        AlwaysOnTop = newValue;
+        OnPropertyChanged(nameof(AlwaysOnTop));
+    });
 
     public RelayCommand RandomMessage => field ??= new RelayCommand(() =>
     {

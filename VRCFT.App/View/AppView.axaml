@@ -16,12 +16,16 @@
 		Width="1100"
 		Height="700"
 
+
 		Icon="/Assets/VrcftTool.ico"
 		Title="AppView"
 
 		Background="Transparent"
 		TransparencyLevelHint="Mica"
-		TransparencyBackgroundFallback="#222">
+		TransparencyBackgroundFallback="#222"
+
+		ExtendClientAreaChromeHints="NoChrome"
+		ExtendClientAreaToDecorationsHint="True">
 
 	<Design.DataContext>
 		<vm:AppViewModel />
@@ -48,17 +52,119 @@
 		</Style>
 	</Window.Styles>
 
-	<Grid RowSpacing="5">
+	<Grid>
 		<Grid.RowDefinitions>
+			<RowDefinition Height="30" />
 			<RowDefinition Height="*" />
-			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
-		<!-- UI -->
 		<Grid Grid.Row="0"
 			  ColumnSpacing="5"
+			  Margin="8,0,0,0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<StackPanel Grid.Column="0"
+						VerticalAlignment="Center"
+						Orientation="Horizontal"
+						Spacing="5">
+
+				<Image Height="18"
+					   VerticalAlignment="Center"
+					   Source="/Assets/VrcftTool.ico" />
+
+				<Label Margin="0,0,5,0" 
+					   VerticalAlignment="Center"
+					   FontSize="13">
+					AppView
+				</Label>
+
+				<Button Classes="Tertiary"
+						Padding="0"
+						MinHeight="20"
+						Height="20"
+						MinWidth="20"
+						Width="20"
+						Command="{Binding ToggleAlwaysOnTop}">
+
+					<Label Foreground="{DynamicResource UiForeground}"
+						   FontSize="11"
+						   FontWeight="Bold"
+						   Content="📌" />
+
+				</Button>
+
+				<Button Classes="Tertiary"
+						Padding="0"
+						MinHeight="20"
+						Height="20"
+						MinWidth="20"
+						Width="20"
+						Command="{Binding OpenSettings}">
+
+					<Label Foreground="{DynamicResource UiForeground}"
+						   FontSize="11"
+						   FontWeight="Bold"
+						   Content="&#9881;" />
+
+				</Button>
+
+				<Button Classes="Tertiary"
+						Padding="0"
+						MinHeight="20"
+						Height="20"
+						MinWidth="20"
+						Width="20">
+
+					<Label Foreground="{DynamicResource UiForeground}"
+						   FontSize="11"
+						   FontWeight="Bold"
+						   Content="&#128448;" />
+
+				</Button>
+
+			</StackPanel>
+
+			<StackPanel Grid.Column="2"
+						VerticalAlignment="Center"
+						Orientation="Horizontal">
+
+				<Button Padding="0"
+						MinHeight="30"
+						Height="30"
+						MinWidth="30"
+						Width="30">
+					_
+				</Button>
+
+				<Button Padding="0"
+						MinHeight="30"
+						Height="30"
+						MinWidth="30"
+						Width="30">
+					O
+				</Button>
+
+				<Button Padding="0"
+						MinHeight="30"
+						Height="30"
+						MinWidth="30"
+						Width="30">
+					X
+				</Button>
+
+			</StackPanel>
+
+		</Grid>
+
+		<!-- UI -->
+		<Grid Grid.Row="1"
+			  ColumnSpacing="5"
 			  RowSpacing="5"
-			  Margin="5,0">
+			  Margin="5,0,5,5">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*" />
 				<RowDefinition Height="*" />
@@ -95,39 +201,6 @@
 			</Border>
 
 		</Grid>
-
-		<Border Grid.Row="1"
-				Margin="5,0,5,5"
-				Padding="5"
-				BorderBrush="{DynamicResource UiBorder}"
-				BorderThickness="1"
-				CornerRadius="5">
-
-			<StackPanel Grid.Column="2"
-						VerticalAlignment="Center"
-						HorizontalAlignment="Right"
-						Orientation="Horizontal"
-						Spacing="5">
-
-				<Button>
-					Unused
-				</Button>
-
-				<Button Command="{Binding RandomMessage}">
-					Random MessageBox
-				</Button>
-
-				<Button Command="{Binding OpenSettings}">
-					Settings
-				</Button>
-
-				<Button Command="{Binding OpenAppData}">
-					AppData
-				</Button>
-
-			</StackPanel>
-
-		</Border>
 
 	</Grid>
 

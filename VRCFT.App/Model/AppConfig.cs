@@ -1,12 +1,18 @@
-﻿using Avalonia.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.Generic;
+using VRCFT.App.Service;
 
 namespace VRCFT.App.Model;
 
 public class AppConfig : ObservableObject
 {
     public Dictionary<string, WindowConfig> Windows { get; set; } = [];
+
+    public bool AlwaysOnTop
+    {
+        get => field;
+        set => SetProperty(ref field, value);
+    }
 
     public bool SliderTicksEnabled
     {
@@ -24,15 +30,4 @@ public class AppConfig : ObservableObject
         get => field;
         set => SetProperty(ref field, value);
     }
-}
-
-public class WindowConfig
-{
-    public int Top { get; set; } = 100;
-    public int Left { get; set; } = 100;
-
-    public double Width { get; set; } = 1100;
-    public double Height { get; set; } = 700;
-
-    public WindowState State { get; set; } = WindowState.Normal;
 }

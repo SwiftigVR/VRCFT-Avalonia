@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Media.Imaging;
+using VRCFT.Base;
 
 namespace VRCFT.Extension.MessageBox;
 
@@ -28,7 +29,7 @@ public sealed class MessageBox
         };
 
         return await dialog.View.ShowDialog<MessageBoxResult>(owner);
-    }
+    }    
 
     private static Bitmap? GetIcon(MessageBoxIcon icon)
     {
@@ -41,6 +42,9 @@ public sealed class MessageBox
             _ => null
         };
 
-        return ImageHelper.Load($"avares://VRCFT.Extension/MessageBox/Assets/{fileName}");
+        if (!string.IsNullOrEmpty(fileName))
+            return ImageHelper.Load(Globals.ExtensionAssetsPath + fileName);
+        else
+            return null;
     }
 }

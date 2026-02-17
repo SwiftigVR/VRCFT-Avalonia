@@ -10,6 +10,7 @@
 		x:DataType="local:MessageBoxViewModel"
 
 		SizeToContent="WidthAndHeight"
+		MaxWidth="450"
 
 		Title="{Binding Title}"
 
@@ -43,8 +44,8 @@
 
 				<Image Grid.Column="0"
 					   Margin="0,0,15,0"
-					   Width="60"
-					   Height="60"
+					   Width="45"
+					   Height="45"
 					   Source="{Binding Icon}"
 					   IsVisible="{Binding Icon, Converter={x:Static ObjectConverters.IsNotNull}}" />
 
@@ -65,30 +66,45 @@
 				CornerRadius="5">
 
 			<!-- Show Buttons depending on DataContext.Buttons -->
-			<StackPanel Orientation="Horizontal"
-						Spacing="5">
+			<Grid MinWidth="200">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
 
-				<Button Classes="Danger"
-						Content="No"
-						Command="{Binding ResultNo}">
+				<Button Grid.Column="0"
+						Classes="Danger"
+						HorizontalAlignment="Left"
+						Command="{Binding ResultNo}"
+						IsVisible="{Binding ShowNoButton}">
+						No
 				</Button>
 
-				<Button Classes="Tertiary"
-						Content="Cancel"
-						Command="{Binding ResultCancel}">
+				<Button Grid.Column="0"
+						Classes="Tertiary"
+						HorizontalAlignment="Left"
+						Command="{Binding ResultCancel}"
+						IsVisible="{Binding ShowCancelButton}">
+						Cancel
 				</Button>
 
-				<Button Classes="Success"
-						Content="Yes"
-						Command="{Binding ResultYes}">
+				<Button Grid.Column="1"
+						Classes="Success"
+						HorizontalAlignment="Right"
+						Command="{Binding ResultYes}"
+						IsVisible="{Binding ShowYesButton}">
+						Yes
 				</Button>
 
-				<Button Classes="Tertiary"
-						Content="OK"
-						Command="{Binding ResultOk}">
+				<Button Grid.Column="1"
+						Classes="Tertiary"
+						HorizontalAlignment="Right"
+						Command="{Binding ResultOk}"
+						IsVisible="{Binding ShowOkButton}">
+						Ok
 				</Button>
 
-			</StackPanel>
+			</Grid>
 
 		</Border>
 

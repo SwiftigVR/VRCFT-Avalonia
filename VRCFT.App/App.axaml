@@ -15,7 +15,8 @@
 		<semi:AvaloniaEditSemiTheme />
 
 		<Style Selector="Button">
-			<Setter Property="IsEnabled" Value="{Binding Command, RelativeSource={RelativeSource Self}, Converter={x:Static ObjectConverters.IsNotNull}}" />
+			<Setter Property="IsEnabled"
+					Value="{Binding Command, RelativeSource={RelativeSource Self}, Converter={x:Static ObjectConverters.IsNotNull}}" />
 		</Style>
 	</Application.Styles>
 

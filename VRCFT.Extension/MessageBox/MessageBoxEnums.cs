@@ -1,10 +1,11 @@
 ﻿namespace VRCFT.Extension.MessageBox;
 
+//[Flags] // 0 1 2 4 8 16 ...
 public enum MessageBoxButtons
 {
-    OK,
-    YesNo,
-    YesCancel,
+    OK = 0,
+    OkCancel = 1,
+    YesNo = 2,
 }
 
 public enum MessageBoxIcon

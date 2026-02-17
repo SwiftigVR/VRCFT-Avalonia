@@ -40,7 +40,13 @@ public partial class AppViewModel : ViewModelBase
 
     public RelayCommand MessageAsync => field ??= new RelayCommand(() =>
     {
-        _ = MessageBox.ShowAsync(View, "Test", "Yep!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        _ = MessageBox.ShowAsync
+        (
+            View,
+            "Test",
+            Globals.LoremIpsum.FormatNewLines(),
+            MessageBoxButtons.YesNo
+        );
     });
 
     public RelayCommand OpenSettings => field ??= new RelayCommand(() =>

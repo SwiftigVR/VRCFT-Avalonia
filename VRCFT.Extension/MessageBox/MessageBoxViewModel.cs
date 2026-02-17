@@ -13,6 +13,11 @@ internal class MessageBoxViewModel : ViewModelBase
     public MessageBoxButtons Buttons { get; set; }
     public Bitmap? Icon { get; set; }
 
+    public bool ShowNoButton => Buttons == MessageBoxButtons.YesNo;
+    public bool ShowCancelButton => Buttons == MessageBoxButtons.OkCancel;
+    public bool ShowYesButton => Buttons == MessageBoxButtons.YesNo;
+    public bool ShowOkButton => Buttons == MessageBoxButtons.OK || Buttons == MessageBoxButtons.OkCancel;
+
     public RelayCommand ResultNo => field ??= new RelayCommand(() => View.Close(MessageBoxResult.No));
     public RelayCommand ResultCancel => field ??= new RelayCommand(() => View.Close(MessageBoxResult.Cancel));
     public RelayCommand ResultYes => field ??= new RelayCommand(() => View.Close(MessageBoxResult.Yes));
